@@ -1,0 +1,9 @@
+.profile__info {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(2, auto);
+  grid-template-areas:
+  'name edit-button'
+  'profession profession';
+  gap: 16px 18px;
+}

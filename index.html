@@ -13,52 +13,66 @@
 
 <body class="root">
   <header class="header root__header">
-    <img src="./images/mesto.svg" alt="Место. Россия" class="header__logo">
+    <img src="./images/icons/mesto.svg" alt="Место. Россия" class="header__logo">
     <div class="header__line"></div>
   </header>
 
   <main class="main">
 
-    <section class="profile">
-      <div class="profile__avatar"></div>
-      <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <p class="profile__profession">Исследователь океана</p>
-        <button class="profile__edit-button"></button>
+    <section class="profile main__profile">
+      <div class="profile__container">
+        <div class="profile__avatar"></div>
+        <div class="profile__info">
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <p class="profile__profession">Исследователь океана</p>
+          <button class="profile__edit-button"></button>
+        </div>
       </div>
       <button class="profile__add-button"></button>
     </section>
 
-    <section class="elements">
+    <section class="elements main__elements">
       <div class="element">
-        <img src="#" alt="" class="element__image">
-        <h2 class="element__name"></h2>
-        <img src="#" alt="" class="element__like">
+        <img src="./images/element__Karachayevsk.jpg" alt="" class="element__image">
+        <div class="element__container">
+          <h2 class="element__name">Карачаевск</h2>
+          <img src="./images/icons/like.svg" alt="Лайк" class="element__like">
+        </div>
       </div>
       <div class="element">
-        <img src="#" alt="" class="element__image">
-        <h2 class="element__name"></h2>
-        <img src="#" alt="" class="element__like">
+        <img src="./images/element__Karachayevsk.jpg" alt="" class="element__image">
+        <div class="element__container">
+          <h2 class="element__name">Карачаевск</h2>
+          <img src="./images/icons/like.svg" alt="" class="element__like">
+        </div>
       </div>
       <div class="element">
-        <img src="#" alt="" class="element__image">
-        <h2 class="element__name"></h2>
-        <img src="#" alt="" class="element__like">
+        <img src="./images/element__Karachayevsk.jpg" alt="" class="element__image">
+          <div class="element__container">
+            <h2 class="element__name">Карачаевск</h2>
+            <img src="./images/icons/like.svg" alt="" class="element__like">
+          </div>
       </div>
       <div class="element">
-        <img src="#" alt="" class="element__image">
-        <h2 class="element__name"></h2>
-        <img src="#" alt="" class="element__like">
+        <img src="./images/element__Karachayevsk.jpg" alt="" class="element__image">
+        <div class="element__container">
+          <h2 class="element__name">Карачаевск</h2>
+          <img src="./images/icons/like.svg" alt="" class="element__like">
+        </div>
       </div>
       <div class="element">
-        <img src="#" alt="" class="element__image">
-        <h2 class="element__name"></h2>
-        <img src="#" alt="" class="element__like">
+        <img src="./images/element__Karachayevsk.jpg" alt="" class="element__image">
+        <div class="element__container">
+          <h2 class="element__name">Карачаевск</h2>
+          <img src="./images/icons/like.svg" alt="" class="element__like">
+        </div>
       </div>
       <div class="element">
-        <img src="#" alt="" class="element__image">
-        <h2 class="element__name"></h2>
-        <img src="#" alt="" class="element__like">
+        <img src="./images/element__Karachayevsk.jpg" alt="" class="element__image">
+        <div class="element__container">
+          <h2 class="element__name">Карачаевск</h2>
+          <img src="./images/icons/like.svg" alt="" class="element__like">
+        </div>
       </div>
     </section>
 
@@ -67,6 +81,7 @@
       <input type="text" class="edit-form__field-name">
       <input type="text" class="edit-form__field-profession">
       <button class="edit-form__submit-button">Сохранить</button>
+      <button class="edit-form__close-icon"></button>
     </form>
 
   </main>
