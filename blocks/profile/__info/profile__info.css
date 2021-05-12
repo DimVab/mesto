@@ -7,3 +7,14 @@
   'profession profession';
   gap: 16px 18px;
 }
+
+@media screen and (max-width: 620px) {
+  .profile__info {
+    width: 282px;
+    grid-template-columns: auto auto 36.5px;
+    grid-template-areas:
+    'name name edit-button'
+    'profession profession profession';
+    gap: 14px 10px;
+  }
+}

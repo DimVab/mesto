@@ -4,3 +4,15 @@
   grid-template-rows: repeat(2, 1fr);
   gap: 20px 17px;
 }
+
+@media screen and (max-width: 1024px) {
+  .elements {
+    grid-template-columns: repeat(2, 282px);
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .elements {
+    grid-template-columns: 1fr;
+  }
+}

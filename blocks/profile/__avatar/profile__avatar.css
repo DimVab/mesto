@@ -7,3 +7,16 @@
   background-size: cover;
   margin-right: 30px;
 }
+
+@media screen and (max-width: 1024px) {
+  .profile__avatar {
+    margin-right: 15px;
+  }
+}
+
+
+@media screen and (max-width: 620px) {
+  .profile__avatar {
+    margin: 0 0 26px 0;
+  }
+}

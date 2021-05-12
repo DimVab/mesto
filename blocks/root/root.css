@@ -1,6 +1,6 @@
 .root {
   box-sizing: border-box;
-  min-width: 320px;
+  /* min-width: 320px; */
   max-width: 1280px;
   background-color: #000;
   margin: 0 auto;
@@ -12,5 +12,23 @@
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
+  position: relative;
 }
 
+@media screen and (max-width: 1279px) {
+  .root {
+    padding: 45px calc((100vw - 880px)/2) 60px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .root {
+    padding: 45px 0 60px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .root {
+    padding: 28px 0 36px;
+  }
+}

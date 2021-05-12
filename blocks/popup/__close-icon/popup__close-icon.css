@@ -1,4 +1,4 @@
-.edit-form__close-icon {
+.popup__close-icon {
   width: 40px;
   height: 40px;
   padding: 0;
@@ -7,7 +7,16 @@
   background-image: url(../../../images/icons/close-Icon.svg);
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
   position: absolute;
   top: -40px;
   right: -40px;
+}
+
+@media screen and (max-width: 620px) {
+  .popup__close-icon {
+    width: 26px;
+    height: 26px;
+    right: 0;
+  }
 }
