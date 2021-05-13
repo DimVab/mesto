@@ -1,4 +1,15 @@
 .element__like  {
   width: 22px;
   height: 19px;
+  transition: opacity .5s;
+  background-color: white;
+}
+
+.element__like:hover  {
+  opacity: .5;
+  cursor: pointer;
+}
+
+.element__like:active  {
+  background-color: white;
 }
