@@ -3,11 +3,12 @@
   font-weight: 900;
   font-size: 24px;
   line-height: 1.2;
-  margin-bottom: 54px;
+  margin-bottom: 44px; /* 54 px на макете - 10 px верхнего паддинга нижестоящего элемента для box-shadow */
 }
 
 @media screen and (max-width: 620px) {
   .popup__title {
+    margin-bottom: 65px; /* 75 px на макете - 10 px верхнего паддинга нижестоящего элемента для box-shadow */
     font-size: 18px;
     line-height: 1.22;
   }
