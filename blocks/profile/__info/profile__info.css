@@ -6,7 +6,7 @@
   grid-template-areas:
   'name edit-button'
   'profession profession';
-  gap: 16px 18px;
+  gap: 8px 18px; /* в макете вертикальный gap 16px, но по PixelPerfect подходит 8px. Видимо из-за разных подходов к высоте строки  */
 }
 
 @media screen and (max-width: 620px) {
@@ -16,6 +16,6 @@
     grid-template-areas:
     'name name edit-button'
     'profession profession profession';
-    gap: 14px 10px;
+    gap: 8px 10px; /* в макете вертикальный gap 14px, но по PixelPerfect подходит 7px  */
   }
 }
