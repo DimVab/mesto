@@ -11,7 +11,8 @@
 
 .popup__field-profession:focus {
   outline: none;
-  box-shadow: 0 0 2px 4px rgba(3, 66, 202, 0.7);
+  -webkit-box-shadow: 0 0 2px 4px rgba(3, 66, 202, 0.7);
+          box-shadow: 0 0 2px 4px rgba(3, 66, 202, 0.7);
   border-radius: 1px;
   /* последние 2 свойства не были на макете в Фигме, но я увидел их на видео на странице проектной работы в Яндекс.Практикуме и сделал "на глаз" */
 }

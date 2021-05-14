@@ -4,7 +4,8 @@
   position: absolute;
   top: -40px;
   right: -40px;
-  transition: opacity .5s;
+  -webkit-transition: opacity .5s;
+  -o-transition: opacity .5s;
   background-image: url(../../../images/icons/close-Icon.svg);
   background-size: contain;
   background-color: #000;
