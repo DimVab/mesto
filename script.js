@@ -12,7 +12,9 @@ function editPopup() {
   popup.classList.add('popup_opened');
 }
 
-function closePopup() {
+function closePopup (evt) {
+  evt.preventDefault();
+
   popup.classList.remove('popup_opened');
 }
 
@@ -22,7 +24,7 @@ function formSubmitHandler (evt) {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
 
-  closePopup();
+  closePopup(evt);
 }
 
 editButton.addEventListener('click', editPopup);

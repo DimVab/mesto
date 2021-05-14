@@ -5,6 +5,11 @@
   top: -40px;
   right: -40px;
   transition: opacity .5s;
+  background-image: url(../../../images/icons/close-Icon.svg);
+  background-size: contain;
+  background-color: #000;
+  border: none;
+  padding: 0;
 }
 
 .popup__close-icon:hover {
