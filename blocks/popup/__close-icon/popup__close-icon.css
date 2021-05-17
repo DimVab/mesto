@@ -8,7 +8,7 @@
   -o-transition: opacity .5s;
   background-image: url(../../../images/icons/close-Icon.svg);
   background-size: contain;
-  background-color: #000;
+  background-color: transparent;
   border: none;
   padding: 0;
 }

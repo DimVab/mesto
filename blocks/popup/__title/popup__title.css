@@ -3,7 +3,7 @@
   font-weight: 900;
   font-size: 24px;
   line-height: 1.2;
-  margin-bottom: 44px; /* 54 px на макете - 10 px верхнего паддинга нижестоящего элемента для box-shadow */
+  margin: 0 0 44px; /* 54 px на макете - 10 px верхнего паддинга нижестоящего элемента для box-shadow */
 }
 
 @media screen and (max-width: 620px) {
