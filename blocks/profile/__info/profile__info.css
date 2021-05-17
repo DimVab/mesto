@@ -1,4 +1,5 @@
 .profile__info {
+  max-width: 550px; /* чтобы переполненный контент не сжимал соседние элементы. Посчитал так: 880px - (120px аватар + 30px его mr) - 150px (ширина button_add) - 30px для зазора, чтобы элементы не слипались */
   display: -ms-grid;
   display: grid;
   grid-template-columns: repeat(2, auto);
@@ -7,6 +8,12 @@
   'name edit-button'
   'profession profession';
   gap: 8px 18px; /* в макете вертикальный gap 16px, но по PixelPerfect подходит 8px. Видимо из-за разных подходов к высоте строки  */
+}
+
+@media screen and (max-width: 1024px) {
+  .profile__info {
+    max-width: 328px;
+  }
 }
 
 @media screen and (max-width: 620px) {
