@@ -84,15 +84,18 @@
   </footer>
 
   <section class="popup">
-    <form class="popup__container">
+    <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <input type="text" class="popup__field-name" value="Жак-Ив Кусто" maxlength="24">
-      <input type="text" class="popup__field-profession" value="Исследователь океана" maxlength="32">
-      <button class="popup__submit-button" type="button">Сохранить</button>
       <button class="popup__close-icon" type="button" aria-label="Закрыть"></button>
-    </form>
+      <form name="about">
+        <input type="text" class="popup__input" value="Жак-Ив Кусто" placeholder="Введите своё имя" name="name">
+        <input type="text" class="popup__input" value="Исследователь океана" placeholder="Ваша профессия" name="profession">
+        <button class="popup__submit-button" type="button">Сохранить</button>
+      </form>
+    </div>
   </section>
 
   <script src="./scripts/index.js"></script>
+
 </body>
 </html>

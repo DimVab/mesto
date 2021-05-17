@@ -1,4 +1,4 @@
-.popup__field-name {
+.popup__input {
   width: 100%;
   margin-bottom: 20px; /* 30 px на макете - 10 px верхнего паддинга нижестоящего элемента для box-shadow */
   padding: 10px 0 13px 2px;
@@ -9,10 +9,14 @@
   line-height: 1.21;
 }
 
-.popup__field-name:focus {
+.popup__input:focus {
   outline: none;
   -webkit-box-shadow: 0 0 2px 4px rgba(3, 66, 202, 0.7);
           box-shadow: 0 0 2px 4px rgba(3, 66, 202, 0.7);
   border-radius: 1px;
   /* последние 2 свойства не были на макете в Фигме, но я увидел их на видео на странице проектной работы в Яндекс.Практикуме и сделал "на глаз" */
+}
+
+.popup__input:last-of-type {
+  margin-bottom: 48px;
 }
