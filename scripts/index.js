@@ -1,27 +1,27 @@
 let editButton = document.querySelector('.profile__edit-button');
 let closeIcon = document.querySelector('.popup__close-icon');
 let popup = document.querySelector('.popup');
-let saveButton = document.querySelector('.popup__submit-button');
-// let nameInput = document.querySelector('.popup__field-name');
-// let jobInput = document.querySelector('.popup__field-profession');
-let popupInput = document.querySelector('.popup__input');
+let nameInput = document.querySelector('.popup__input_type_name');
+let jobInput = document.querySelector('.popup__input_type_job');
 let profileName = document.querySelector('.profile__name');
 let profileJob = document.querySelector('.profile__job');
+let formElement = document.querySelector('.popup__form');
 
-function editPopup(evt) {
-  evt.preventDefault();
+function editPopup() {
   popup.classList.toggle('popup_opened');
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
 }
 
 function formSubmitHandler (evt) {
   evt.preventDefault();
 
-  profileName.textContent = popupInput.value;
-  profileJob.textContent = popupInput.value;
-// здесь редактируется только имя, исправить это потом
-  editPopup(evt);
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+
+  editPopup();
 }
 
 editButton.addEventListener('click', editPopup);
 closeIcon.addEventListener('click', editPopup);
-saveButton.addEventListener('click', formSubmitHandler);
+formElement.addEventListener('submit', formSubmitHandler);
