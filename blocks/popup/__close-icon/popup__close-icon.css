@@ -1,9 +1,9 @@
 .popup__close-icon {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   position: absolute;
-  top: -40px;
-  right: -40px;
+  top: -36px;
+  right: -36px;
   -webkit-transition: opacity .5s;
   -o-transition: opacity .5s;
   background-image: url(../../../images/icons/close-Icon.svg);
@@ -20,8 +20,9 @@
 
 @media screen and (max-width: 620px) {
   .popup__close-icon {
-    width: 26px;
-    height: 26px;
-    right: 0;
+    width: 20px;
+    height: 20px;
+    top: -42px;
+    right: 8px;
   }
 }

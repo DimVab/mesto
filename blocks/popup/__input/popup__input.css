@@ -1,7 +1,7 @@
 .popup__input {
   width: 100%;
-  margin-bottom: 20px; /* 30 px на макете - 10 px верхнего паддинга нижестоящего элемента для box-shadow */
-  padding: 10px 0 13px 2px;
+  margin-bottom: 20px;
+  padding: 10px 0 9px 0;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
   font-weight: 400;
@@ -18,5 +18,5 @@
 }
 
 .popup__input:last-of-type {
-  margin-bottom: 48px;
+  margin-bottom: 45px;
 }
