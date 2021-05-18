@@ -18,5 +18,11 @@
 }
 
 .popup__input:nth-last-of-type(2) {
-  margin-bottom: 45px;
+  margin-bottom: 48px;
+}
+
+@media screen and (max-width: 620px) {
+  .popup__input:nth-last-of-type(2) {
+    margin-bottom: 45px;
+  }
 }
