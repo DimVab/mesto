@@ -60,9 +60,6 @@ function renderCard(item) {
   card.querySelector('.element__name').textContent = item.name;
   card.querySelector('.element__image').src = item.link;
   card.querySelector('.element__image').alt = item.alt;
-  // card.cardName.textContent = item.name;
-  // card.cardImage.src = item.link;
-  // card.cardImage.alt = item.alt;
   cardsList.append(card);
 }
 
