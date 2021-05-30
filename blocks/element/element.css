@@ -4,5 +4,6 @@
   background-color: #fff;
   border-radius: 10px;
   font-size: 0; /* без этого появляется зазор между элементами*/
+  position: relative;
 }
 

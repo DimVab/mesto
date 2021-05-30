@@ -54,6 +54,18 @@
     </div>
   </section>
 
+  <section class="popup">
+    <div class="popup__container">
+      <h2 class="popup__title">Новое место</h2>
+      <button class="popup__close-icon" type="button" aria-label="Закрыть"></button>
+      <form class="popup__form" name="about">
+        <input type="text" class="popup__input popup__input_type_name-of-card" placeholder="Название" name="name">
+        <input type="text" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" name="url-adress">
+        <input type="submit" class="popup__submit-button"  value="Создать">
+      </form>
+    </div>
+  </section>
+
   <template class="card-template">
     <li class="element">
       <img src="" alt="" class="element__image">
@@ -61,6 +73,7 @@
         <h2 class="element__name"></h2>
         <button class="element__like" type="button" aria-label="Поставить лайк"></button>
       </div>
+      <button class="element__delete" type="button" aria-label="Удалить элемент"></button>
     </li>
   </template>
 
