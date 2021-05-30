@@ -22,7 +22,9 @@ const formElementAddButton = addPopup.querySelector('.popup__form');
 const cardNameInput = addPopup.querySelector('.popup__input_type_name-of-card');
 const cardUrlInput = addPopup.querySelector('.popup__input_type_url');
 // переменные, связанные с открытием попапа с картинкой
-const cardPopup = document.querySelectorAll('.popup')[2];
+const ImagePopup = document.querySelectorAll('.popup')[2];
+const ImagePopupImage = ImagePopup.querySelector('.popup__image');
+const ImagePopupCaption = ImagePopup.querySelector('.popup__caption');
 
 const initialCards = [
   {
@@ -73,6 +75,7 @@ function renderCard(item) {
   cardsList.append(card);
   addLikeFunction();
   addDeleteFunction();
+  addImagePopup();
 }
 
 // отрисовать карточку в начале при добавлении
@@ -84,6 +87,7 @@ function renderCardAtTheBegining(item) {
   cardsList.prepend(card);
   addLikeFunction();
   addDeleteFunction();
+  addImagePopup();
 }
 
 // открыть попап редактирования профиля
@@ -162,6 +166,32 @@ function addDeleteFunction() {
   deleteButton.forEach(function(item) {
     item.addEventListener('click', deleteCard);
   });
+}
+
+// открыть попап с картинкой
+function openImage(evt) {
+  const eventTarget = evt.target;
+  ImagePopup.classList.add('popup_opened');
+  ImagePopup.style.backgroundColor = 'rgba(0, 0, 0, .9)';
+  ImagePopupImage.src = eventTarget.src;
+  ImagePopupCaption.textContent = eventTarget.nextElementSibling.firstElementChild.textContent;
+}
+
+// закрыть попап с картинкой
+function closeImage() {
+  ImagePopup.classList.remove('popup_opened');
+}
+
+// добавить картинке слушатель события
+function addImagePopup() {
+  const clickImage = document.querySelectorAll('.element__image');
+  const closeIcon = ImagePopup.querySelector('.popup__close-icon');
+
+  clickImage.forEach(function(item) {
+    item.addEventListener('click', openImage);
+  });
+
+  closeIcon.addEventListener('click', closeImage);
 }
 
 // слушатели событий
