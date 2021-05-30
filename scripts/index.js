@@ -21,6 +21,8 @@ const addPopopCloseIcon = addPopup.querySelector('.popup__close-icon');
 const formElementAddButton = addPopup.querySelector('.popup__form');
 const cardNameInput = addPopup.querySelector('.popup__input_type_name-of-card');
 const cardUrlInput = addPopup.querySelector('.popup__input_type_url');
+// переменные, связанные с открытием попапа с картинкой
+const cardPopup = document.querySelectorAll('.popup')[2];
 
 const initialCards = [
   {
@@ -69,7 +71,8 @@ function renderCard(item) {
   card.querySelector('.element__image').src = item.link;
   card.querySelector('.element__image').alt = item.alt;
   cardsList.append(card);
-  addLikeFunc();
+  addLikeFunction();
+  addDeleteFunction();
 }
 
 // отрисовать карточку в начале при добавлении
@@ -79,7 +82,8 @@ function renderCardAtTheBegining(item) {
   card.querySelector('.element__image').src = item.link;
   card.querySelector('.element__image').alt = item.alt;
   cardsList.prepend(card);
-  addLikeFunc();
+  addLikeFunction();
+  addDeleteFunction();
 }
 
 // открыть попап редактирования профиля
@@ -124,21 +128,39 @@ function addCard(evt) {
   item.link = cardUrlInput.value;
   renderCardAtTheBegining(item);
 
+  cardNameInput.value = '';
+  cardUrlInput.value = '';
+
   closeAddPopop();
 }
 
 // лайкнуть карточку
-function like(evt) {
+function likeCard(evt) {
   const eventTarget = evt.target;
   eventTarget.classList.toggle('element__like_active');
 }
 
 // добавить функцию лайка
-function addLikeFunc() {
+function addLikeFunction() {
   const likeButton = document.querySelectorAll('.element__like');
 
   likeButton.forEach(function(item) {
-    item.addEventListener('click', like);
+    item.addEventListener('click', likeCard);
+  });
+}
+
+// удалить карточку
+function deleteCard(evt) {
+  const eventTarget = evt.target.closest('.element');
+  eventTarget.remove();
+}
+
+// добавить функцию удаления карточки
+function addDeleteFunction() {
+  const deleteButton = document.querySelectorAll('.element__delete');
+
+  deleteButton.forEach(function(item) {
+    item.addEventListener('click', deleteCard);
   });
 }
 
