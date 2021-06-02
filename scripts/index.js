@@ -62,7 +62,6 @@ function openProfilePopup() {
 // открыть попап с картинкой
 function openImagePopup(cardImage) {
   openPopup(imagePopup);
-  imagePopup.classList.add('popup_transparency_dark');
   openedImage.src = cardImage.src;
   caption.textContent = cardImage.nextElementSibling.firstElementChild.textContent;
 }
