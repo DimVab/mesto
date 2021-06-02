@@ -43,7 +43,7 @@ function createCard(item) {
   card.querySelector('.element__image').alt = item.alt;
   likeButton.addEventListener('click', handleLikeIcon);
   deleteButton.addEventListener('click', handleDeleteIcon);
-  cardImage.addEventListener('click', () => {openImagePopup(cardImage);});
+  cardImage.addEventListener('click', () => openImagePopup(cardImage));
   return card;
 }
 
@@ -60,11 +60,11 @@ function openProfilePopup() {
 }
 
 // открыть попап с картинкой
-function openImagePopup(cardData) {
+function openImagePopup(cardImage) {
   openPopup(imagePopup);
   imagePopup.classList.add('popup_transparency_dark');
-  openedImage.src = cardData.src;
-  caption.textContent = cardData.nextElementSibling.firstElementChild.textContent;
+  openedImage.src = cardImage.src;
+  caption.textContent = cardImage.nextElementSibling.firstElementChild.textContent;
 }
 
 // закрыть попап
@@ -116,10 +116,10 @@ function handleDeleteIcon(evt) {
 // для редактирования профиля
 editButton.addEventListener('click', openProfilePopup);
 profileFormElement.addEventListener('submit', saveProfileChanges);
-profilePopupCloseIcon.addEventListener('click', () => {closePopup(profilePopup);});
+profilePopupCloseIcon.addEventListener('click', () => closePopup(profilePopup));
 // для добавления карточки
-addButton.addEventListener('click', () => {openPopup(addingImagePopup);});
+addButton.addEventListener('click', () => openPopup(addingImagePopup));
 addingImageFormElement.addEventListener('submit', addCard);
-addingImagePopupCloseIcon.addEventListener('click', () => {closePopup(addingImagePopup);});
+addingImagePopupCloseIcon.addEventListener('click', () => closePopup(addingImagePopup));
 // закрыть попап с картинкой
-imagePopupCloseIcon.addEventListener('click', () => {closePopup(imagePopup);});
+imagePopupCloseIcon.addEventListener('click', () => closePopup(imagePopup));
