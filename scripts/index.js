@@ -63,6 +63,7 @@ function openProfilePopup() {
 function openImagePopup(cardImage) {
   openPopup(imagePopup);
   imagePopup.classList.add('popup_transparency_dark');
+  // затемнение попапа с картинкой (0.9) отличается от затемнения других попапов (0.5)
   openedImage.src = cardImage.src;
   caption.textContent = cardImage.nextElementSibling.firstElementChild.textContent;
 }
