@@ -36,12 +36,14 @@ initialCards.forEach((item) => {
 function createCard(item) {
   const card = cardTemplate.cloneNode(true);
   const likeButton = card.querySelector('.element__like');
+  const deleteButton = card.querySelector('.element__delete');
+  const cardImage = card.querySelector('.element__image');
   card.querySelector('.element__name').textContent = item.name;
   card.querySelector('.element__image').src = item.link;
   card.querySelector('.element__image').alt = item.alt;
-  addLikeFunction();
-  addDeleteFunction();
-  addOpenFunction();
+  likeButton.addEventListener('click', handleLikeIcon);
+  deleteButton.addEventListener('click', handleDeleteIcon);
+  cardImage.addEventListener('click', () => {openImagePopup(cardImage);});
   return card;
 }
 
@@ -58,12 +60,11 @@ function openProfilePopup() {
 }
 
 // открыть попап с картинкой
-function openImagePopup(evt) {
-  const eventTarget = evt.target;
+function openImagePopup(cardData) {
   openPopup(imagePopup);
   imagePopup.classList.add('popup_transparency_dark');
-  openedImage.src = eventTarget.src;
-  caption.textContent = eventTarget.nextElementSibling.firstElementChild.textContent;
+  openedImage.src = cardData.src;
+  caption.textContent = cardData.nextElementSibling.firstElementChild.textContent;
 }
 
 // закрыть попап
@@ -100,42 +101,15 @@ function addCard(evt) {
 }
 
 // лайкнуть карточку
-function likeCard(evt) {
+function handleLikeIcon(evt) {
   const eventTarget = evt.target;
   eventTarget.classList.toggle('element__like_active');
 }
 
-// добавить функцию лайка
-function addLikeFunction() {
-  const likeButton = document.querySelectorAll('.element__like');
-
-  likeButton.forEach((item) => {
-    item.addEventListener('click', likeCard);
-  });
-}
-
 // удалить карточку
-function deleteCard(evt) {
+function handleDeleteIcon(evt) {
   const eventTarget = evt.target.closest('.element');
   eventTarget.remove();
-}
-
-// добавить функцию удаления карточки
-function addDeleteFunction() {
-  const deleteButton = document.querySelectorAll('.element__delete');
-
-  deleteButton.forEach((item) => {
-    item.addEventListener('click', deleteCard);
-  });
-}
-
-// добавить картинке слушатель события
-function addOpenFunction() {
-  const clickImage = document.querySelectorAll('.element__image');
-
-  clickImage.forEach((item) => {
-    item.addEventListener('click', openImagePopup);
-  });
 }
 
 // слушатели событий
