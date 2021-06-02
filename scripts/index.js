@@ -8,7 +8,7 @@ const cardAlt = cardTemplate.querySelector('.element__image');
 const cardsList = document.querySelector('.elements__list');
 // переменные, связанные с редактированием профиля
 const editButton = document.querySelector('.profile__edit-button');
-const profilePopup = document.querySelectorAll('.popup')[0];
+const profilePopup = document.querySelector('.popup_type_edit-profile');
 const nameInput = profilePopup.querySelector('.popup__input_type_name');
 const jobInput = profilePopup.querySelector('.popup__input_type_job');
 const profileName = document.querySelector('.profile__name');
@@ -16,47 +16,14 @@ const profileJob = document.querySelector('.profile__job');
 const profileFormElement = profilePopup.querySelector('.popup__form');
 // переменные, связанные с добавлением карточек
 const addButton = document.querySelector('.profile__add-button');
-const addingImagePopup = document.querySelectorAll('.popup')[1];
+const addingImagePopup = document.querySelector('.popup_type_add-image');
 const addingImageFormElement = addingImagePopup.querySelector('.popup__form');
 const cardNameInput = addingImagePopup.querySelector('.popup__input_type_name-of-card');
 const cardUrlInput = addingImagePopup.querySelector('.popup__input_type_url');
 // переменные, связанные с открытием попапа с картинкой
-const imagePopup = document.querySelectorAll('.popup')[2];
+const imagePopup = document.querySelector('.popup_type_open-image');
 const openedImage = imagePopup.querySelector('.popup__image');
 const caption = imagePopup.querySelector('.popup__caption');
-
-const initialCards = [
-  {
-    name: 'Алтай',
-    link: './images/elements/Altai.jpg',
-    alt: 'Горные луга Алтая'
-  },
-  {
-    name: 'Побережье Камчатки',
-    link: './images/elements/Kamchatka-beach.jpg',
-    alt: 'Побережье Камчатки'
-  },
-  {
-    name: 'Парк Монрепо',
-    link: './images/elements/Monrepo.jpg',
-    alt: 'Парк Монрепо зимой'
-  },
-  {
-    name: 'Байкал',
-    link: './images/elements/Baikal.jpg',
-    alt: 'Байкал зимой'
-  },
-  {
-    name: 'Красная поляна',
-    link: './images/elements/Krasnaya-polyana.jpg',
-    alt: 'Горы на Красной поляне'
-  },
-  {
-    name: 'Вулкан Камчатки',
-    link: './images/elements/Kamchatka-volkano.jpg',
-    alt: 'Вулкан на Камчатке'
-  }
-];
 
 renderCards();
 
