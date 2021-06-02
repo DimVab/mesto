@@ -25,35 +25,21 @@ const imagePopup = document.querySelector('.popup_type_open-image');
 const openedImage = imagePopup.querySelector('.popup__image');
 const caption = imagePopup.querySelector('.popup__caption');
 
-renderCards();
-
-// отрисовать все карточки массива
-function renderCards() {
-  initialCards.forEach(renderCard);
-}
+initialCards.forEach((item) => {
+  const newCard = createCard(item);
+  cardsList.append(newCard);
+});
 
 // отрисовать карточку
-function renderCard(item) {
+function createCard(item) {
   const card = cardTemplate.cloneNode(true);
   card.querySelector('.element__name').textContent = item.name;
   card.querySelector('.element__image').src = item.link;
   card.querySelector('.element__image').alt = item.alt;
-  cardsList.append(card);
   addLikeFunction();
   addDeleteFunction();
   addOpenFunction();
-}
-
-// отрисовать карточку в начале при добавлении
-function renderCardAtTheBegining(item) {
-  const card = cardTemplate.cloneNode(true);
-  card.querySelector('.element__name').textContent = item.name;
-  card.querySelector('.element__image').src = item.link;
-  card.querySelector('.element__image').alt = item.alt;
-  cardsList.prepend(card);
-  addLikeFunction();
-  addDeleteFunction();
-  addOpenFunction();
+  return card;
 }
 
 // открыть попап редактирования профиля
@@ -102,7 +88,9 @@ function addCard(evt) {
 
   item.name = cardNameInput.value;
   item.link = cardUrlInput.value;
-  renderCardAtTheBegining(item);
+
+  const newCard = createCard(item);
+  cardsList.prepend(newCard);
 
   cardNameInput.value = '';
   cardUrlInput.value = '';
