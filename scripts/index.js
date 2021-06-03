@@ -43,7 +43,7 @@ function createCard(item) {
   card.querySelector('.element__image').alt = item.alt;
   likeButton.addEventListener('click', handleLikeIcon);
   deleteButton.addEventListener('click', handleDeleteIcon);
-  cardImage.addEventListener('click', () => openImagePopup(cardImage));
+  cardImage.addEventListener('click', () => openImagePopup(item));
   return card;
 }
 
@@ -60,10 +60,10 @@ function openProfilePopup() {
 }
 
 // открыть попап с картинкой
-function openImagePopup(cardImage) {
+function openImagePopup(cardData) {
   openPopup(imagePopup);
-  openedImage.src = cardImage.src;
-  caption.textContent = cardImage.nextElementSibling.firstElementChild.textContent;
+  openedImage.src = cardData.link;
+  caption.textContent = cardData.name;
 }
 
 // закрыть попап
@@ -93,8 +93,7 @@ function addCard(evt) {
   const newCard = createCard(item);
   cardsList.prepend(newCard);
 
-  cardNameInput.value = '';
-  cardUrlInput.value = '';
+  addingImageFormElement.reset();
 
   closePopup(addingImagePopup);
 }
