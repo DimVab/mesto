@@ -79,16 +79,16 @@ function openImagePopup(cardData) {
   caption.textContent = cardData.name;
 }
 
-// закрыть попап
-function closePopup(popup) {
+// закрыть любой попап
+function closePopup() {
+  const popup = document.querySelector('.popup_opened');
   popup.classList.remove('popup_opened');
 }
 
 // закрыть попап кнопкой
 function exitUsingKey(evt) {
   if (evt.key === exitKey) {
-    const popup = document.querySelector('.popup_opened');
-    closePopup(popup);
+    closePopup();
   }
 }
 
@@ -99,7 +99,7 @@ function saveProfileChanges (evt) {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
 
-  closePopup(profilePopup, config);
+  closePopup();
 }
 
 // добавить карточку
@@ -116,7 +116,7 @@ function addCard(evt) {
 
   addingImageFormElement.reset();
 
-  closePopup(addingImagePopup);
+  closePopup();
 }
 
 // лайкнуть карточку
@@ -136,17 +136,17 @@ function handleDeleteIcon(evt) {
 editButton.addEventListener('click', () => openProfilePopup(profilePopup, selectors));
 profileFormElement.addEventListener('submit', saveProfileChanges);
 profilePopupCloseIcon.addEventListener('click', () => {
-  closePopup(profilePopup);
+  closePopup();
   hideInputErrors(profilePopup, selectors);
 });
 // для добавления карточки
 addButton.addEventListener('click', () => openAddingImagePopup(addingImagePopup, selectors));
 addingImageFormElement.addEventListener('submit', addCard);
 addingImagePopupCloseIcon.addEventListener('click', () => {
-  closePopup(addingImagePopup);
+  closePopup();
   hideInputErrors(addingImagePopup, selectors);
 });
 // закрыть попап с картинкой
-imagePopupCloseIcon.addEventListener('click', () => closePopup(imagePopup));
+imagePopupCloseIcon.addEventListener('click', closePopup);
 // закрыть попап кнопкой Esc
 document.addEventListener('keydown', (evt) => exitUsingKey(evt));
