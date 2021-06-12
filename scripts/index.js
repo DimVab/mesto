@@ -53,6 +53,8 @@ function createCard(item) {
 // открыть попап
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', handleExitUsingKey);
+  popup.addEventListener('click', handleClickOverlay);
 }
 
 // открыть попап редактирования профиля
@@ -83,11 +85,21 @@ function openImagePopup(cardData) {
 function closePopup() {
   const popup = document.querySelector('.popup_opened');
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleExitUsingKey);
+  popup.removeEventListener('click', handleClickOverlay);
+  hideInputErrors(popup, selectors);
 }
 
 // закрыть попап кнопкой
-function exitUsingKey(evt) {
+function handleExitUsingKey(evt) {
   if (evt.key === exitKey) {
+    closePopup();
+  }
+}
+
+// закрыть попап кликом по оверлею
+function handleClickOverlay(evt) {
+  if (evt.target.classList.contains('popup')) {
     closePopup();
   }
 }
@@ -135,18 +147,10 @@ function handleDeleteIcon(evt) {
 // для редактирования профиля
 editButton.addEventListener('click', () => openProfilePopup(profilePopup, selectors));
 profileFormElement.addEventListener('submit', saveProfileChanges);
-profilePopupCloseIcon.addEventListener('click', () => {
-  closePopup();
-  hideInputErrors(profilePopup, selectors);
-});
+profilePopupCloseIcon.addEventListener('click', closePopup);
 // для добавления карточки
 addButton.addEventListener('click', () => openAddingImagePopup(addingImagePopup, selectors));
 addingImageFormElement.addEventListener('submit', addCard);
-addingImagePopupCloseIcon.addEventListener('click', () => {
-  closePopup();
-  hideInputErrors(addingImagePopup, selectors);
-});
+addingImagePopupCloseIcon.addEventListener('click', closePopup);
 // закрыть попап с картинкой
 imagePopupCloseIcon.addEventListener('click', closePopup);
-// закрыть любой попап кнопкой Esc
-document.addEventListener('keydown', exitUsingKey);
