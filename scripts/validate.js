@@ -5,15 +5,16 @@
 4. Объявить функцию проверки валидации для одного поля +
 5. Объявить функцию проверки валидации для всех полей (для кнопки)
 6. Объявить функцию изменения состояния кнопки (если выполняется п.5)
-7. Объявить функцию навешивания функций п.4 и функции 6 в начале функции и при навешивании функций п.4 на все поля
-8. Объявить функцию навешивания функций п7. на формы
-9. Вызвать функцию п.8 2 раза, передавая им в аргумент объекты
+7. Объявить функцию навешивания функций п.4 и функции 6 в начале функции и при навешивании функций п.4 на все поля +
+8. Объявить функцию навешивания функций п7. на формы +
+9. Вызвать функцию п.8 2 раза, передавая им в аргумент объекты (адаптировать под обхъекты)
 */
 
 // тестовые переменные:
-const form1 = document.querySelector('.popup__form');
-const input1 = form1.querySelector('.popup__input_type_name');
-const error1 = 'Ашипка!';
+// const form1 = document.querySelector('.popup__form[name="about"]');
+// const form2 = document.querySelectorAll('.popup__form')[1];
+// const input1 = form1.querySelector('.popup__input_type_name');
+// const error1 = 'Ашипка!';
 // рабочие переменные:
 
 
@@ -42,9 +43,38 @@ function isValid(formElement, inputElement) {
   console.log('Функция isValid выполнена'); /* потом удалить */
 }
 
+function setEventListeners(formElement) {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', () => {
+      isValid(formElement, inputElement);
+    });
+    console.log('Функция setEventListeners выполненяется на каждой итерации'); /* потом удалить */
+  });
+  console.log('Функция setEventListeners выполнена'); /* потом удалить */
+}
+
+function enableValidation() {
+  const formList = Array.from(document.querySelectorAll('.popup__form'));
+
+  formList.forEach( (formElement) => {
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+
+    setEventListeners(formElement);
+    console.log('Функция enableValidation выполненяется на каждой итерации'); /* потом удалить */
+  });
+  console.log('Функция enableValidation выполнена'); /* потом удалить */
+}
+
 // тестовые вызовы функций
 // showInputError(form1, input1, error1);
 // hideInputError(form1, input1);
-isValid(form1, input1);
+// isValid(form1, input1);
+// setEventListeners(form1);
+// setEventListeners(form2);
 
 // рабочие вызовы функций:
+enableValidation();
