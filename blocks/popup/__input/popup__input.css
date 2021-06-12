@@ -13,11 +13,6 @@
   outline: none;
 }
 
-.popup__input:invalid {
-  outline: none;
-  border-bottom: 1px solid #FF0000;
-}
-
 .popup__input:nth-last-of-type(2) {
   margin-bottom: 48px;
 }

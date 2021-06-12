@@ -1,26 +1,24 @@
-// Возможные ошибки:
-// В задании при открытии попапа поля нейтральные, а у меня сразу красные. Возможно, это связано с тем, что у меня поля меняют стили с помощью псевдокласса :invalid, и нужно менять стили через классы
-
 const selectors = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit-button',
   inactiveButtonAttribute: 'disabled',
-  // inputErrorClass: 'popup__input_type_error',
+  inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active'
 }
 
 // добавляет подсказки об ошибке
 function showInputError(formElement, inputElement, errorMessage, config) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add(config.inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(config.errorClass);
-  // не добавляется класс стилизации input при ошибке валидации, т.к. input стилизуется при помощи псевдокласса :invalid
 }
 
 // убирает подсказки об ошибке
 function hideInputError(formElement, inputElement, config) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove(config.inputErrorClass);
   errorElement.textContent = '';
   errorElement.classList.remove(config.errorClass);
 }
@@ -54,10 +52,8 @@ function hasInvalidInput (inputList) {
 function toggleButtonState (inputList, buttonElement, config) {
   if (hasInvalidInput(inputList)) {
     buttonElement.setAttribute(config.inactiveButtonAttribute, config.inactiveButtonAttribute);
-    console.log('Функция toggleButtonState ДОБАВИЛА атрибут disabled');
   } else {
     buttonElement.removeAttribute(config.inactiveButtonAttribute);
-    console.log('Функция toggleButtonState УБРАЛА атрибут disabled');
   }
 }
 
