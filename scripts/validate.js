@@ -25,6 +25,15 @@ function hideInputError(formElement, inputElement, config) {
   errorElement.classList.remove(config.errorClass);
 }
 
+// скрыть все подсказки об ошибках в форме
+function hideInputErrors(popup, config) {
+  const formElement = popup.querySelector(config.formSelector);
+  const inputElements = formElement.querySelectorAll(config.inputSelector);
+  inputElements.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, config);
+  });
+}
+
 // вызывает функции, добавляющие или убирающие подсказки об ошибке в зависимости от валидации
 function isValid(formElement, inputElement, config) {
   if (!inputElement.validity.valid) {
@@ -50,6 +59,14 @@ function toggleButtonState (inputList, buttonElement, config) {
     buttonElement.removeAttribute(config.inactiveButtonAttribute);
     console.log('Функция toggleButtonState УБРАЛА атрибут disabled');
   }
+}
+
+  //  возвратить к исходному состояние кнопки, если закрыл попап с противоположным состоянием
+function resetButtonState(popup, config) {
+  const formElement = popup.querySelector(config.formSelector);
+  const buttonElement = formElement.querySelector(config.submitButtonSelector);
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+  toggleButtonState (inputList, buttonElement, config);
 }
 
 // навешивает функции валидации на все поля ввода в форме, которая указывается в аргументе
