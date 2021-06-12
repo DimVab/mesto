@@ -25,6 +25,9 @@ const imagePopup = document.querySelector('.popup_type_open-image');
 const openedImage = imagePopup.querySelector('.popup__image');
 const caption = imagePopup.querySelector('.popup__caption');
 const imagePopupCloseIcon = imagePopup.querySelector('.popup__close-icon');
+// другие переменные
+const exitKey = 'Escape';
+
 
 // отрисовать карточки из массива
 initialCards.forEach((item) => {
@@ -79,6 +82,14 @@ function openImagePopup(cardData) {
 // закрыть попап
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+}
+
+// закрыть попап кнопкой
+function exitUsingKey(evt) {
+  if (evt.key === exitKey) {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
 }
 
 // сохранить изменения в редактировании профиля
@@ -137,3 +148,5 @@ addingImagePopupCloseIcon.addEventListener('click', () => {
 });
 // закрыть попап с картинкой
 imagePopupCloseIcon.addEventListener('click', () => closePopup(imagePopup));
+// закрыть попап кнопкой Esc
+document.addEventListener('keydown', (evt) => exitUsingKey(evt));
