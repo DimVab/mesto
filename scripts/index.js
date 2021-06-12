@@ -150,4 +150,3 @@ profileFormElement.addEventListener('submit', saveProfileChanges);
 // для добавления карточки
 addButton.addEventListener('click', () => openAddingImagePopup(addingImagePopup, selectors));
 addingImageFormElement.addEventListener('submit', addCard);
-
