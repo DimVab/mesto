@@ -11,10 +11,11 @@
 
 .popup__input:focus {
   outline: none;
-  -webkit-box-shadow: 0 0 2px 4px rgba(3, 66, 202, 0.7);
-          box-shadow: 0 0 2px 4px rgba(3, 66, 202, 0.7);
-  border-radius: 1px;
-  /* последние 2 свойства не были на макете в Фигме, но я увидел их на видео на странице проектной работы в Яндекс.Практикуме и сделал "на глаз" */
+}
+
+.popup__input:invalid {
+  outline: none;
+  border-bottom: 1px solid #FF0000;
 }
 
 .popup__input:nth-last-of-type(2) {

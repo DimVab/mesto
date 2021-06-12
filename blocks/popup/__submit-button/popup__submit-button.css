@@ -21,6 +21,12 @@
   cursor: pointer;
 }
 
+.popup__submit-button:disabled {
+  background-color: rgba(0, 0, 0, .0);
+  color: rgba(0, 0, 0, .2);
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
 @media screen and (max-width: 620px) {
   .popup__submit-button {
     height: 46px;
