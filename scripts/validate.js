@@ -1,51 +1,37 @@
-/* План:
-1. Объявить нужные переменные
-2. Объявить функцию показа ошибки +
-3. Объявить функцию скрытия ошибки +
-4. Объявить функцию проверки валидации для одного поля +
-5. Объявить функцию проверки валидации для всех полей (для кнопки) +
-6. Объявить функцию изменения состояния кнопки (если выполняется п.5) +
-7. Объявить функцию навешивания функций п.4 и функции 6 в начале функции и при навешивании функций п.4 на все поля +
-8. Объявить функцию навешивания функций п7. на формы +
-9. Вызвать функцию п.8 2 раза, передавая им в аргумент объекты (адаптировать под обхъекты)
+// Возможные ошибки:
+// В задании при открытии попапа поля нейтральные, а у меня сразу красные. Возможно, это связано с тем, что у меня поля меняют стили с помощью псевдокласса :invalid, и нужно менять стили через классы
 
-Возможные ошибки:
-В задании при открытии попапа поля нейтральные, а у меня сразу красные. Возможно, это связано с тем, что у меня поля меняют стили с помощью псевдокласса :invalid, и нужно менять стили через классы
-*/
-
-// тестовые переменные:
-const form1 = document.querySelector('.popup__form[name="about"]');
-const form2 = document.querySelector('.popup__form[name="place"]');
-// const input1 = form1.querySelector('.popup__input_type_name');
-// const error1 = 'Ашипка!';
-// рабочие переменные:
+const selectors = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonAttribute: 'disabled',
+  // inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+}
 
 // добавляет подсказки об ошибке
-function showInputError(formElement, inputElement, errorMessage) {
+function showInputError(formElement, inputElement, errorMessage, config) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  // потом удалить: переменная объявляется внутри функции, тк её значение содержит параметр, а параметр при разных вызовах разный
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__input-error_active');
-  console.log('Функция showInputError выполнена'); /* потом удалить */
+  errorElement.classList.add(config.errorClass);
   // не добавляется класс стилизации input при ошибке валидации, т.к. input стилизуется при помощи псевдокласса :invalid
 }
 
 // убирает подсказки об ошибке
-function hideInputError(formElement, inputElement) {
+function hideInputError(formElement, inputElement, config) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   errorElement.textContent = '';
-  errorElement.classList.remove('popup__input-error_active');
-  console.log('Функция hideInputError выполнена'); /* потом удалить */
+  errorElement.classList.remove(config.errorClass);
 }
 
 // вызывает функции, добавляющие или убирающие подсказки об ошибке в зависимости от валидации
-function isValid(formElement, inputElement) {
+function isValid(formElement, inputElement, config) {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, config);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, config);
   }
-  console.log('Функция isValid выполнена'); /* потом удалить */
 }
 
 // проверяет проходят ли все поля формы валидацию
@@ -54,57 +40,44 @@ function hasInvalidInput (inputList) {
     return !inputElement.validity.valid;
   });
 }
-// проверка (потом удалить)
-console.log(hasInvalidInput(Array.from(form1.querySelectorAll('.popup__input'))));
-console.log(hasInvalidInput(Array.from(form2.querySelectorAll('.popup__input'))));
 
 // добавить или убрать атрибут disabled кнопке, в зависимости от того, проходят ли все поля формы валидацию или нет
-function toggleButtonState (inputList, buttonElement) {
+function toggleButtonState (inputList, buttonElement, config) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.setAttribute('disabled', 'disabled');
+    buttonElement.setAttribute(config.inactiveButtonAttribute, config.inactiveButtonAttribute);
+    console.log('Функция toggleButtonState ДОБАВИЛА атрибут disabled');
   } else {
-    buttonElement.removeAttribute('disabled');
+    buttonElement.removeAttribute(config.inactiveButtonAttribute);
+    console.log('Функция toggleButtonState УБРАЛА атрибут disabled');
   }
 }
 
 // навешивает функции валидации на все поля ввода в форме, которая указывается в аргументе
-function setEventListeners(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonElement = formElement.querySelector('.popup__submit-button');
+function setEventListeners(formElement, config) {
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+  const buttonElement = formElement.querySelector(config.submitButtonSelector);
 
-  toggleButtonState (inputList, buttonElement);
+  toggleButtonState (inputList, buttonElement, config);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement);
-      toggleButtonState (inputList, buttonElement);
+      isValid(formElement, inputElement, config);
+      toggleButtonState (inputList, buttonElement, config);
     });
-    console.log('Функция setEventListeners выполненяется на каждой итерации'); /* потом удалить */
   });
-  console.log('Функция setEventListeners выполнена'); /* потом удалить */
 }
 
 // навешивает функции навешивания функций на все поля ввода на все формы в документе
-function enableValidation() {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
+function enableValidation(config) {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
 
   formList.forEach( (formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
 
-    setEventListeners(formElement);
-    console.log('Функция enableValidation выполненяется на каждой итерации'); /* потом удалить */
+    setEventListeners(formElement, config);
   });
-  console.log('Функция enableValidation выполнена'); /* потом удалить */
 }
 
-// тестовые вызовы функций
-// showInputError(form1, input1, error1);
-// hideInputError(form1, input1);
-// isValid(form1, input1);
-// setEventListeners(form1);
-// setEventListeners(form2);
-
-// рабочие вызовы функций:
-enableValidation();
+enableValidation(selectors);

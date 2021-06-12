@@ -53,10 +53,25 @@ function openPopup(popup) {
 }
 
 // открыть попап редактирования профиля
-function openProfilePopup() {
+function openProfilePopup(config) {
   openPopup(profilePopup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  // чтобы состояние кнопки обнулялось, если закрыл попап с неактивной кнопкой
+  const formElement = profilePopup.querySelector(config.formSelector);
+  const buttonElement = formElement.querySelector(config.submitButtonSelector);
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+  toggleButtonState (inputList, buttonElement, config);
+}
+
+// открыть попап добавления картинки (вынес в отдельную функцию, чтобы поля обнулялись, когда закрыл попап)
+function openAddingImagePopup(config) {
+  openPopup(addingImagePopup);
+  addingImageFormElement.reset();
+  const formElement = addingImagePopup.querySelector(config.formSelector);
+  const buttonElement = formElement.querySelector(config.submitButtonSelector);
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+  toggleButtonState (inputList, buttonElement, config);
 }
 
 // открыть попап с картинкой
@@ -67,8 +82,14 @@ function openImagePopup(cardData) {
 }
 
 // закрыть попап
-function closePopup(popup) {
+function closePopup(popup, config) {
   popup.classList.remove('popup_opened');
+  // чтобы тексты ошибок исчезали при закрытии попапа
+  const formElement = popup.querySelector(config.formSelector);
+  const inputElements = formElement.querySelectorAll(config.inputSelector);
+  inputElements.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, config);
+  });
 }
 
 // сохранить изменения в редактировании профиля
@@ -78,7 +99,7 @@ function saveProfileChanges (evt) {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
 
-  closePopup(profilePopup);
+  closePopup(profilePopup, config);
 }
 
 // добавить карточку
@@ -112,12 +133,12 @@ function handleDeleteIcon(evt) {
 
 // слушатели событий
 // для редактирования профиля
-editButton.addEventListener('click', openProfilePopup);
+editButton.addEventListener('click', () => openProfilePopup(selectors));
 profileFormElement.addEventListener('submit', saveProfileChanges);
-profilePopupCloseIcon.addEventListener('click', () => closePopup(profilePopup));
+profilePopupCloseIcon.addEventListener('click', () => closePopup(profilePopup, selectors));
 // для добавления карточки
-addButton.addEventListener('click', () => openPopup(addingImagePopup));
+addButton.addEventListener('click', () => openAddingImagePopup(selectors));
 addingImageFormElement.addEventListener('submit', addCard);
-addingImagePopupCloseIcon.addEventListener('click', () => closePopup(addingImagePopup));
+addingImagePopupCloseIcon.addEventListener('click', () => closePopup(addingImagePopup, selectors));
 // закрыть попап с картинкой
-imagePopupCloseIcon.addEventListener('click', () => closePopup(imagePopup));
+imagePopupCloseIcon.addEventListener('click', () => closePopup(imagePopup, selectors));
