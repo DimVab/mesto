@@ -12,19 +12,16 @@ const jobInput = profilePopup.querySelector('.popup__input_type_job');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const profileFormElement = profilePopup.querySelector('.popup__form');
-const profilePopupCloseIcon = profilePopup.querySelector('.popup__close-icon');
 // переменные, связанные с добавлением карточек
 const addButton = document.querySelector('.profile__add-button');
 const addingImagePopup = document.querySelector('.popup_type_add-image');
 const addingImageFormElement = addingImagePopup.querySelector('.popup__form');
 const cardNameInput = addingImagePopup.querySelector('.popup__input_type_name-of-card');
 const cardUrlInput = addingImagePopup.querySelector('.popup__input_type_url');
-const addingImagePopupCloseIcon = addingImagePopup.querySelector('.popup__close-icon');
 // переменные, связанные с открытием попапа с картинкой
 const imagePopup = document.querySelector('.popup_type_open-image');
 const openedImage = imagePopup.querySelector('.popup__image');
 const caption = imagePopup.querySelector('.popup__caption');
-const imagePopupCloseIcon = imagePopup.querySelector('.popup__close-icon');
 // другие переменные
 const exitKey = 'Escape';
 
@@ -53,6 +50,8 @@ function createCard(item) {
 // открыть попап
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  const closeIcon = popup.querySelector('.popup__close-icon');
+  closeIcon.addEventListener('click', closePopup);
   document.addEventListener('keydown', handleExitUsingKey);
   popup.addEventListener('click', handleClickOverlay);
 }
@@ -85,6 +84,7 @@ function openImagePopup(cardData) {
 function closePopup() {
   const popup = document.querySelector('.popup_opened');
   popup.classList.remove('popup_opened');
+  closeIcon.removeEventListener('click', closePopup);
   document.removeEventListener('keydown', handleExitUsingKey);
   popup.removeEventListener('click', handleClickOverlay);
   hideInputErrors(popup, selectors);
@@ -143,14 +143,11 @@ function handleDeleteIcon(evt) {
   eventTarget.remove();
 }
 
-// слушатели событий
+// слушатели событий:
 // для редактирования профиля
 editButton.addEventListener('click', () => openProfilePopup(profilePopup, selectors));
 profileFormElement.addEventListener('submit', saveProfileChanges);
-profilePopupCloseIcon.addEventListener('click', closePopup);
 // для добавления карточки
 addButton.addEventListener('click', () => openAddingImagePopup(addingImagePopup, selectors));
 addingImageFormElement.addEventListener('submit', addCard);
-addingImagePopupCloseIcon.addEventListener('click', closePopup);
-// закрыть попап с картинкой
-imagePopupCloseIcon.addEventListener('click', closePopup);
+
