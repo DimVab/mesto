@@ -148,5 +148,5 @@ addingImagePopupCloseIcon.addEventListener('click', () => {
 });
 // закрыть попап с картинкой
 imagePopupCloseIcon.addEventListener('click', closePopup);
-// закрыть попап кнопкой Esc
-document.addEventListener('keydown', (evt) => exitUsingKey(evt));
+// закрыть любой попап кнопкой Esc
+document.addEventListener('keydown', exitUsingKey);
