@@ -61,16 +61,18 @@ function openProfilePopup(popup, config) {
   openPopup(popup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  // чтобы состояние кнопки возвращалось к исходному, если закрыл попап с неактивной кнопкой
+  // чтобы состояние кнопки возвращалось к исходному, если закрыл попап с неактивной кнопкой, а ошибки полей ввода скрывались
   resetButtonState(popup, config);
+  hideInputErrors(popup, selectors);
 }
 
 // открыть попап добавления картинки (вынес в отдельную функцию, чтобы поля обнулялись, когда закрыл попап)
 function openAddingImagePopup(popup, config) {
   openPopup(popup);
   addingImageFormElement.reset();
-  // чтобы состояние кнопки возвращалось к исходному, если закрыл попап с активной кнопкой
+  // чтобы состояние кнопки возвращалось к исходному, если закрыл попап с активной кнопкой, а ошибки полей ввода скрывались
   resetButtonState(popup, config);
+  hideInputErrors(popup, selectors);
 }
 
 // открыть попап с картинкой
@@ -83,11 +85,11 @@ function openImagePopup(cardData) {
 // закрыть любой попап
 function closePopup() {
   const popup = document.querySelector('.popup_opened');
+  const closeIcon = popup.querySelector('.popup__close-icon');
   popup.classList.remove('popup_opened');
   closeIcon.removeEventListener('click', closePopup);
   document.removeEventListener('keydown', handleExitUsingKey);
   popup.removeEventListener('click', handleClickOverlay);
-  hideInputErrors(popup, selectors);
 }
 
 // закрыть попап кнопкой
