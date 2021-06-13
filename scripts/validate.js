@@ -1,10 +1,10 @@
 const selectors = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-button',
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__submit-button',
   inactiveButtonAttribute: 'disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active'
 }
 
 // добавляет подсказки об ошибке

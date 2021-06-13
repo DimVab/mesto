@@ -7,17 +7,17 @@ const cardsList = document.querySelector('.elements__list');
 // переменные, связанные с редактированием профиля
 const editButton = document.querySelector('.profile__edit-button');
 const profilePopup = document.querySelector('.popup_type_edit-profile');
-const nameInput = profilePopup.querySelector('.popup__input_type_name');
-const jobInput = profilePopup.querySelector('.popup__input_type_job');
+const nameInput = profilePopup.querySelector('.form__input_type_name');
+const jobInput = profilePopup.querySelector('.form__input_type_job');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
-const profileFormElement = profilePopup.querySelector('.popup__form');
+const profileFormElement = profilePopup.querySelector('.form');
 // переменные, связанные с добавлением карточек
 const addButton = document.querySelector('.profile__add-button');
 const addingImagePopup = document.querySelector('.popup_type_add-image');
-const addingImageFormElement = addingImagePopup.querySelector('.popup__form');
-const cardNameInput = addingImagePopup.querySelector('.popup__input_type_name-of-card');
-const cardUrlInput = addingImagePopup.querySelector('.popup__input_type_url');
+const addingImageFormElement = addingImagePopup.querySelector('.form');
+const cardNameInput = addingImagePopup.querySelector('.form__input_type_name-of-card');
+const cardUrlInput = addingImagePopup.querySelector('.form__input_type_url');
 // переменные, связанные с открытием попапа с картинкой
 const imagePopup = document.querySelector('.popup_type_open-image');
 const openedImage = imagePopup.querySelector('.popup__image');
