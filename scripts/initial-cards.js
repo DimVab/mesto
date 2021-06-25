@@ -30,3 +30,5 @@ const initialCards = [
     alt: 'Вулкан на Камчатке'
   }
 ];
+
+export default initialCards;
