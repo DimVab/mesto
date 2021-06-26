@@ -1,10 +1,30 @@
 import initialCards from './initial-cards.js';
 import Card from './card.js';
+import FormValidator from './formValidator.js';
 
 initialCards.forEach((item) => {
   const card = new Card (item, '.card-template');
   const cardElement = card.getCard();
   document.querySelector('.elements__list').append(cardElement);
+});
+
+const selectors = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__submit-button',
+  inactiveButtonAttribute: 'disabled',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active'
+}
+
+const formList = Array.from(document.querySelectorAll(selectors.formSelector));
+formList.forEach( (formElement) => {
+  formElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+  });
+
+  const formValidator = new FormValidator (selectors, formElement);
+  formValidator.enableValidation();
 });
 
 
@@ -40,18 +60,21 @@ function openProfilePopup(popup, config) {
   openPopup(popup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  // чтобы состояние кнопки возвращалось к исходному, если закрыл попап с неактивной кнопкой, а ошибки полей ввода скрывались
-  resetButtonState(popup, config);
-  hideInputErrors(popup, selectors);
+  setResetValidateStatus(popup);
 }
 
 // открыть попап добавления картинки (вынес в отдельную функцию, чтобы поля обнулялись, когда закрыл попап)
 function openAddingImagePopup(popup, config) {
   openPopup(popup);
   addingImageFormElement.reset();
-  // чтобы состояние кнопки возвращалось к исходному, если закрыл попап с активной кнопкой, а ошибки полей ввода скрывались
-  resetButtonState(popup, config);
-  hideInputErrors(popup, selectors);
+  setResetValidateStatus(popup);
+}
+
+function setResetValidateStatus(popup) {
+  const formElement = popup.querySelector('.form');
+  const formValidator = new FormValidator (selectors, formElement);
+  formValidator._hideInputErrors(popup);
+  formValidator._resetButtonState(popup);
 }
 
 // закрыть любой попап
