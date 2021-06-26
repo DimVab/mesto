@@ -111,7 +111,7 @@ function saveProfileChanges (evt) {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
 
-  closePopup();
+  closePopup(profilePopup);
 }
 
 // добавить карточку
@@ -129,7 +129,7 @@ function addCard(evt) {
 
   addingImageFormElement.reset();
 
-  closePopup();
+  closePopup(addingImagePopup);
 }
 
 // слушатели событий:
