@@ -1,3 +1,10 @@
+import { openPopup } from "./index.js";
+
+// переменные, связанные с открытием попапа с картинкой
+const imagePopup = document.querySelector('.popup_type_open-image');
+const openedImage = imagePopup.querySelector('.popup__image');
+const caption = imagePopup.querySelector('.popup__caption');
+
 class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
@@ -39,6 +46,10 @@ class Card {
     this._card.querySelector('.element__delete').addEventListener('click', () => {
       this._handleDeleteIcon();
     });
+
+    this._card.querySelector('.element__image').addEventListener('click', () => {
+      this._handleImageClick();
+    });
   }
 
   _handleLikeIcon() {
@@ -47,6 +58,12 @@ class Card {
 
   _handleDeleteIcon() {
     this._card.querySelector('.element__delete').closest('.element').remove();
+  }
+
+  _handleImageClick() {
+    openPopup(imagePopup);
+    openedImage.src = this._src;
+    caption.textContent = this._name;
   }
 }
 
