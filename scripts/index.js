@@ -2,6 +2,25 @@ import initialCards from './initial-cards.js';
 import Card from './card.js';
 import FormValidator from './formValidator.js';
 
+// переменные, связанные с редактированием профиля
+const editButton = document.querySelector('.profile__edit-button');
+const profilePopup = document.querySelector('.popup_type_edit-profile');
+const nameInput = profilePopup.querySelector('.form__input_type_name');
+const jobInput = profilePopup.querySelector('.form__input_type_job');
+const profileName = document.querySelector('.profile__name');
+const profileJob = document.querySelector('.profile__job');
+const profileFormElement = profilePopup.querySelector('.form');
+// переменные, связанные с добавлением карточек
+const cardsList = document.querySelector('.elements__list');
+const addButton = document.querySelector('.profile__add-button');
+const addingImagePopup = document.querySelector('.popup_type_add-image');
+const addingImageFormElement = addingImagePopup.querySelector('.form');
+const cardNameInput = addingImagePopup.querySelector('.form__input_type_name-of-card');
+const cardUrlInput = addingImagePopup.querySelector('.form__input_type_url');
+// другие переменные
+const exitKey = 'Escape';
+
+// первоначальное добавление карточек
 initialCards.forEach((item) => {
   const card = new Card (item, '.card-template');
   const cardElement = card.getCard();
@@ -17,6 +36,7 @@ const selectors = {
   errorClass: 'form__input-error_active'
 }
 
+// добавление валидации
 const formList = Array.from(document.querySelectorAll(selectors.formSelector));
 formList.forEach( (formElement) => {
   formElement.addEventListener('submit', (evt) => {
@@ -26,25 +46,6 @@ formList.forEach( (formElement) => {
   const formValidator = new FormValidator (selectors, formElement);
   formValidator.enableValidation();
 });
-
-
-// переменные, связанные с редактированием профиля
-const editButton = document.querySelector('.profile__edit-button');
-const profilePopup = document.querySelector('.popup_type_edit-profile');
-const nameInput = profilePopup.querySelector('.form__input_type_name');
-const jobInput = profilePopup.querySelector('.form__input_type_job');
-const profileName = document.querySelector('.profile__name');
-const profileJob = document.querySelector('.profile__job');
-const profileFormElement = profilePopup.querySelector('.form');
-// переменные, связанные с добавлением карточек
-const addButton = document.querySelector('.profile__add-button');
-const addingImagePopup = document.querySelector('.popup_type_add-image');
-const addingImageFormElement = addingImagePopup.querySelector('.form');
-const cardNameInput = addingImagePopup.querySelector('.form__input_type_name-of-card');
-const cardUrlInput = addingImagePopup.querySelector('.form__input_type_url');
-// другие переменные
-const exitKey = 'Escape';
-
 
 // открыть попап
 function openPopup(popup) {
@@ -70,6 +71,7 @@ function openAddingImagePopup(popup, config) {
   setResetValidateStatus(popup);
 }
 
+// вернуть состояние валидации к исходному значению
 function setResetValidateStatus(popup) {
   const formElement = popup.querySelector('.form');
   const formValidator = new FormValidator (selectors, formElement);
@@ -120,8 +122,9 @@ function addCard(evt) {
   item.name = cardNameInput.value;
   item.link = cardUrlInput.value;
 
-  const newCard = createCard(item);
-  cardsList.prepend(newCard);
+  const card = new Card (item, '.card-template');
+  const cardElement = card.getCard();
+  cardsList.prepend(cardElement);
 
   addingImageFormElement.reset();
 
