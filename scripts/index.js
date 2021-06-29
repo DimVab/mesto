@@ -26,9 +26,8 @@ const exitKey = 'Escape';
 
 // первоначальное добавление карточек
 initialCards.forEach((item) => {
-  const card = new Card (item, '.card-template');
-  const cardElement = card.getCard();
-  document.querySelector('.elements__list').append(cardElement);
+  const cardElement = createCard(item);
+  cardsList.append(cardElement);
 });
 
 const selectors = {
@@ -115,13 +114,17 @@ function addCard(evt) {
   item.name = cardNameInput.value;
   item.link = cardUrlInput.value;
 
-  const card = new Card (item, '.card-template');
-  const cardElement = card.getCard();
-  cardsList.prepend(cardElement);
+  const newCard = createCard(item);
+  cardsList.prepend(newCard);
 
   addingImageFormElement.reset();
 
   closePopup(addingImagePopup);
+}
+
+function createCard(item) {
+  const card = new Card (item, '.card-template');
+  return card.getCard();
 }
 
 // слушатели событий:
