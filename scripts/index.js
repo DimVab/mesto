@@ -1,6 +1,6 @@
 import initialCards from './initial-cards.js';
-import Card from './card.js';
-import FormValidator from './formValidator.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 // переменные, связанные с редактированием профиля
 const editButton = document.querySelector('.profile__edit-button');
@@ -140,4 +140,4 @@ addingImageFormElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
 });
 
-export { openPopup, handleClickOverlay };
+export { openPopup };
