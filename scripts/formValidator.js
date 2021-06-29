@@ -7,7 +7,7 @@ class FormValidator {
     this._inputErrorClass = selectors.inputErrorClass;
     this._errorClass = selectors.errorClass;
     this._formElement = formElement;
-
+// классовые переменные
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     this._submitButton = this._formElement.querySelector(this._submitButtonSelector);
   }
@@ -37,12 +37,6 @@ class FormValidator {
     errorElement.classList.remove(this._errorClass);
   }
 
-  _hideInputErrors() {
-    this._inputList.forEach((inputElement) => {
-      this._hideInputError(inputElement);
-    });
-  }
-
   _isValid(inputElement) {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
@@ -65,7 +59,11 @@ class FormValidator {
     }
   }
 
-  _resetButtonState() {
+  resetValidation() {
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
+
     this._toggleButtonState ();
   }
 

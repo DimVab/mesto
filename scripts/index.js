@@ -62,7 +62,8 @@ function openProfilePopup(popup) {
   openPopup(popup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  setResetValidateStatus(popup);
+  const formValidator = new FormValidator (selectors, profileFormElement); /* костыль, потом уберу */
+  formValidator.resetValidation();
   popup.addEventListener('click', handleClickOverlay);
 }
 
@@ -70,16 +71,9 @@ function openProfilePopup(popup) {
 function openAddingImagePopup(popup) {
   openPopup(popup);
   addingImageFormElement.reset();
-  setResetValidateStatus(popup);
+  const formValidator = new FormValidator (selectors, addingImageFormElement); /* костыль, потом уберу */
+  formValidator.resetValidation();
   popup.addEventListener('click', handleClickOverlay);
-}
-
-// вернуть состояние валидации к исходному значению
-function setResetValidateStatus(popup) {
-  const formElement = popup.querySelector('.form');
-  const formValidator = new FormValidator (selectors, formElement);
-  formValidator._hideInputErrors(popup);
-  formValidator._resetButtonState(popup);
 }
 
 // закрыть любой попап
