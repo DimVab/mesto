@@ -11,6 +11,7 @@ const jobInput = profilePopup.querySelector('.form__input_type_job');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const profileFormElement = profilePopup.querySelector('.form');
+
 // переменные, связанные с добавлением карточек
 const cardsList = document.querySelector('.elements__list');
 const addButton = document.querySelector('.profile__add-button');
@@ -49,16 +50,16 @@ function openPopup(popup) {
 }
 
 // открыть попап редактирования профиля
-function openProfilePopup(popup) {
-  openPopup(popup);
+function openProfilePopup() {
+  openPopup(profilePopup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   profileFormValidator.resetValidation();
 }
 
 // открыть попап добавления картинки (вынес в отдельную функцию, чтобы поля обнулялись, когда закрыл попап)
-function openAddingImagePopup(popup) {
-  openPopup(popup);
+function openAddingImagePopup() {
+  openPopup(addingImagePopup);
   addingImageFormElement.reset();
   addingImageFormValidator.resetValidation();
 }
@@ -116,13 +117,13 @@ profileFormElement.addEventListener('submit', (evt) => {
 });
 addingImageFormElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
+});
 // для редактирования профиля
-editButton.addEventListener('click', () => openProfilePopup(profilePopup, selectors));
+editButton.addEventListener('click', openProfilePopup);
 profileFormElement.addEventListener('submit', saveProfileChanges);
 // для добавления карточки
-addButton.addEventListener('click', () => openAddingImagePopup(addingImagePopup, selectors));
+addButton.addEventListener('click', openAddingImagePopup);
 addingImageFormElement.addEventListener('submit', addCard);
-});
 // закрыть любой попап
 popups.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
