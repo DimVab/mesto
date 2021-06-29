@@ -2,6 +2,7 @@ import initialCards from './initial-cards.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
+const popups = document.querySelectorAll('.popup');
 // переменные, связанные с редактированием профиля
 const editButton = document.querySelector('.profile__edit-button');
 const profilePopup = document.querySelector('.popup_type_edit-profile');
@@ -10,7 +11,6 @@ const jobInput = profilePopup.querySelector('.form__input_type_job');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const profileFormElement = profilePopup.querySelector('.form');
-const profilePopupCloseIcon = profilePopup.querySelector('.popup__close-icon');
 // переменные, связанные с добавлением карточек
 const cardsList = document.querySelector('.elements__list');
 const addButton = document.querySelector('.profile__add-button');
@@ -18,10 +18,8 @@ const addingImagePopup = document.querySelector('.popup_type_add-image');
 const addingImageFormElement = addingImagePopup.querySelector('.form');
 const cardNameInput = addingImagePopup.querySelector('.form__input_type_name-of-card');
 const cardUrlInput = addingImagePopup.querySelector('.form__input_type_url');
-const addingImagePopupCloseIcon = addingImagePopup.querySelector('.popup__close-icon');
 // другие переменные
 const imagePopup = document.querySelector('.popup_type_open-image');
-const imagePopupCloseIcon = imagePopup.querySelector('.popup__close-icon');
 const exitKey = 'Escape';
 
 // первоначальное добавление карточек
@@ -79,13 +77,6 @@ function handleExitUsingKey(evt) {
   }
 }
 
-// закрыть попап кликом по оверлею
-function handleClickOverlay(evt) {
-  if (evt.target.classList.contains('popup')) {
-    closePopup(evt.target);
-  }
-}
-
 // сохранить изменения в редактировании профиля
 function saveProfileChanges (evt) {
   evt.preventDefault();
@@ -119,25 +110,29 @@ function createCard(item) {
 }
 
 // слушатели событий:
-// для редактирования профиля
-editButton.addEventListener('click', () => openProfilePopup(profilePopup, selectors));
-profilePopup.addEventListener('click', handleClickOverlay);
-profileFormElement.addEventListener('submit', saveProfileChanges);
-profilePopupCloseIcon.addEventListener('click', () => closePopup(profilePopup));
-// для добавления карточки
-addButton.addEventListener('click', () => openAddingImagePopup(addingImagePopup, selectors));
-addingImagePopup.addEventListener('click', handleClickOverlay);
-addingImageFormElement.addEventListener('submit', addCard);
-addingImagePopupCloseIcon.addEventListener('click', () => closePopup(addingImagePopup));
-// для попапа с картинкой
-imagePopup.addEventListener('click', handleClickOverlay);
-imagePopupCloseIcon.addEventListener('click', () => closePopup(imagePopup));
 // для форм
 profileFormElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
 });
 addingImageFormElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
+// для редактирования профиля
+editButton.addEventListener('click', () => openProfilePopup(profilePopup, selectors));
+profileFormElement.addEventListener('submit', saveProfileChanges);
+// для добавления карточки
+addButton.addEventListener('click', () => openAddingImagePopup(addingImagePopup, selectors));
+addingImageFormElement.addEventListener('submit', addCard);
+});
+// закрыть любой попап
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(popup);
+    }
+    if (evt.target.classList.contains('popup__close-icon')) {
+      closePopup(popup);
+    }
+  });
 });
 
 export { openPopup };
