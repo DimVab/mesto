@@ -64,7 +64,6 @@ function openProfilePopup(popup) {
   jobInput.value = profileJob.textContent;
   const formValidator = new FormValidator (selectors, profileFormElement); /* костыль, потом уберу */
   formValidator.resetValidation();
-  popup.addEventListener('click', handleClickOverlay);
 }
 
 // открыть попап добавления картинки (вынес в отдельную функцию, чтобы поля обнулялись, когда закрыл попап)
@@ -73,7 +72,6 @@ function openAddingImagePopup(popup) {
   addingImageFormElement.reset();
   const formValidator = new FormValidator (selectors, addingImageFormElement); /* костыль, потом уберу */
   formValidator.resetValidation();
-  popup.addEventListener('click', handleClickOverlay);
 }
 
 // закрыть любой попап
@@ -129,13 +127,16 @@ function addCard(evt) {
 // слушатели событий:
 // для редактирования профиля
 editButton.addEventListener('click', () => openProfilePopup(profilePopup, selectors));
+profilePopup.addEventListener('click', handleClickOverlay);
 profileFormElement.addEventListener('submit', saveProfileChanges);
 profilePopupCloseIcon.addEventListener('click', () => closePopup(profilePopup));
 // для добавления карточки
 addButton.addEventListener('click', () => openAddingImagePopup(addingImagePopup, selectors));
+addingImagePopup.addEventListener('click', handleClickOverlay);
 addingImageFormElement.addEventListener('submit', addCard);
 addingImagePopupCloseIcon.addEventListener('click', () => closePopup(addingImagePopup));
-// закрытие попапа с картинкой
+// попап с картинкой
+imagePopup.addEventListener('click', handleClickOverlay);
 imagePopupCloseIcon.addEventListener('click', () => closePopup(imagePopup));
 
 export { openPopup, handleClickOverlay };

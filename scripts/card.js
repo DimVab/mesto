@@ -69,7 +69,6 @@ class Card {
     openPopup(imagePopup);
     openedImage.src = this._src;
     caption.textContent = this._name;
-    imagePopup.addEventListener('click', handleClickOverlay);
   }
 }
 

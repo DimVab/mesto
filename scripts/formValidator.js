@@ -7,7 +7,7 @@ class FormValidator {
     this._inputErrorClass = selectors.inputErrorClass;
     this._errorClass = selectors.errorClass;
     this._formElement = formElement;
-// классовые переменные
+    // классовые переменные
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     this._submitButton = this._formElement.querySelector(this._submitButtonSelector);
   }
