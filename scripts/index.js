@@ -31,7 +31,6 @@ initialCards.forEach((item) => {
 });
 
 const selectors = {
-  formSelector: '.form',
   inputSelector: '.form__input',
   submitButtonSelector: '.form__submit-button',
   inactiveButtonAttribute: 'disabled',
@@ -40,15 +39,10 @@ const selectors = {
 }
 
 // добавление валидации
-const formList = Array.from(document.querySelectorAll(selectors.formSelector));
-formList.forEach( (formElement) => {
-  formElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-  });
-
-  const formValidator = new FormValidator (selectors, formElement);
-  formValidator.enableValidation();
-});
+const profileFormValidator = new FormValidator (selectors, profileFormElement);
+profileFormValidator.enableValidation();
+const addingImageFormValidator = new FormValidator (selectors, addingImageFormElement);
+addingImageFormValidator.enableValidation();
 
 // открыть попап
 function openPopup(popup) {
@@ -61,16 +55,14 @@ function openProfilePopup(popup) {
   openPopup(popup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  const formValidator = new FormValidator (selectors, profileFormElement); /* костыль, потом уберу */
-  formValidator.resetValidation();
+  profileFormValidator.resetValidation();
 }
 
 // открыть попап добавления картинки (вынес в отдельную функцию, чтобы поля обнулялись, когда закрыл попап)
 function openAddingImagePopup(popup) {
   openPopup(popup);
   addingImageFormElement.reset();
-  const formValidator = new FormValidator (selectors, addingImageFormElement); /* костыль, потом уберу */
-  formValidator.resetValidation();
+  addingImageFormValidator.resetValidation();
 }
 
 // закрыть любой попап
@@ -137,8 +129,15 @@ addButton.addEventListener('click', () => openAddingImagePopup(addingImagePopup,
 addingImagePopup.addEventListener('click', handleClickOverlay);
 addingImageFormElement.addEventListener('submit', addCard);
 addingImagePopupCloseIcon.addEventListener('click', () => closePopup(addingImagePopup));
-// попап с картинкой
+// для попапа с картинкой
 imagePopup.addEventListener('click', handleClickOverlay);
 imagePopupCloseIcon.addEventListener('click', () => closePopup(imagePopup));
+// для форм
+profileFormElement.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+});
+addingImageFormElement.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+});
 
 export { openPopup, handleClickOverlay };

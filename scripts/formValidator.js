@@ -1,6 +1,5 @@
 class FormValidator {
   constructor(selectors, formElement) {
-    this._formSelector = selectors.formSelector; /* не используется, подумать над удалением */
     this._inputSelector = selectors.inputSelector;
     this._submitButtonSelector = selectors.submitButtonSelector;
     this._inactiveButtonAttribute = selectors.inactiveButtonAttribute;
