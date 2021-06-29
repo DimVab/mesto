@@ -57,7 +57,7 @@ function openProfilePopup() {
   profileFormValidator.resetValidation();
 }
 
-// открыть попап добавления картинки (вынес в отдельную функцию, чтобы поля обнулялись, когда закрыл попап)
+// открыть попап добавления картинки
 function openAddingImagePopup() {
   openPopup(addingImagePopup);
   addingImageFormElement.reset();
