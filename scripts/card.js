@@ -25,11 +25,16 @@ class Card {
 
   _generateCard() {
     this._card = this._getTemplate();
+    // классовые переменные
+    this._cardImage = this._card.querySelector('.element__image');
+    this._likeButton = this._card.querySelector('.element__like');
+    this._deleteButton = this._card.querySelector('.element__delete');
+
     this._setEventListeners();
 
     this._card.querySelector('.element__name').textContent = this._name;
-    this._card.querySelector('.element__image').src = this._src;
-    this._card.querySelector('.element__image').alt = this._alt;
+    this._cardImage.src = this._src;
+    this._cardImage.alt = this._alt;
   }
 
   getCard() {
@@ -39,25 +44,25 @@ class Card {
   }
 
   _setEventListeners() {
-    this._card.querySelector('.element__like').addEventListener('click', () => {
+    this._likeButton.addEventListener('click', () => {
       this._handleLikeIcon();
     });
 
-    this._card.querySelector('.element__delete').addEventListener('click', () => {
+    this._deleteButton.addEventListener('click', () => {
       this._handleDeleteIcon();
     });
 
-    this._card.querySelector('.element__image').addEventListener('click', () => {
+    this._cardImage.addEventListener('click', () => {
       this._handleImageClick();
     });
   }
 
   _handleLikeIcon() {
-    this._card.querySelector('.element__like').classList.toggle('element__like_active');
+    this._likeButton.classList.toggle('element__like_active');
   }
 
   _handleDeleteIcon() {
-    this._card.querySelector('.element__delete').closest('.element').remove();
+    this._deleteButton.closest('.element').remove();
   }
 
   _handleImageClick() {
