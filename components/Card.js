@@ -6,11 +6,12 @@ const openedImage = imagePopup.querySelector('.popup__image');
 const caption = imagePopup.querySelector('.popup__caption');
 
 class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._src = data.link;
     this._alt = data.alt;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
