@@ -1,6 +1,6 @@
-import initialCards from './initial-cards.js';
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
+import initialCards from '../utils/initial-cards.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
 
 const popups = document.querySelectorAll('.popup');
 // переменные, связанные с редактированием профиля

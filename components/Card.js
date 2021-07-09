@@ -1,4 +1,4 @@
-import { openPopup } from "./index.js";
+import { openPopup } from "../pages/index.js";
 
 // переменные, связанные с открытием попапа с картинкой
 const imagePopup = document.querySelector('.popup_type_open-image');
