@@ -1,4 +1,4 @@
-import initialCards from '../utils/initial-cards.js';
+import { initialCards, selectors } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
@@ -22,21 +22,12 @@ const cardNameInput = addingImagePopup.querySelector('.form__input_type_name-of-
 const cardUrlInput = addingImagePopup.querySelector('.form__input_type_url');
 // другие переменные
 const imagePopup = document.querySelector('.popup_type_open-image');
-const exitKey = 'Escape';
 
 // первоначальное добавление карточек
 initialCards.forEach((item) => {
   const cardElement = createCard(item);
   cardsList.append(cardElement);
 });
-
-const selectors = {
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__submit-button',
-  inactiveButtonAttribute: 'disabled',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'form__input-error_active'
-}
 
 // добавление валидации
 const profileFormValidator = new FormValidator (selectors, profileFormElement);

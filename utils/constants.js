@@ -31,4 +31,14 @@ const initialCards = [
   }
 ];
 
-export default initialCards;
+const selectors = {
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__submit-button',
+  inactiveButtonAttribute: 'disabled',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active'
+}
+
+const exitKey = 'Escape';
+
+export { initialCards, selectors, exitKey };
