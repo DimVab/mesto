@@ -3,6 +3,7 @@ import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import Popup from '../components/Popup.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
 const popups = document.querySelectorAll('.popup');
 // переменные, связанные с редактированием профиля
@@ -25,7 +26,15 @@ const cardUrlInput = addingImagePopup.querySelector('.form__input_type_url');
 const cardsList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card (item, '.card-template');
+    const card = new Card (item, '.card-template', {handleCardClick: (item) => {
+
+      // слабая связь внутри слабой связи
+      const popupWithImage = new PopupWithImage('.popup_type_open-image');
+      card._cardImage.addEventListener('click', () => {
+        popupWithImage.open(card.src, card.name);
+      });
+    }});
+
     const cardElement = card.getCard();
     cardsList.addItem(cardElement);
   }
@@ -132,5 +141,3 @@ popups.forEach((popup) => {
     }
   });
 });
-
-export { openPopup };

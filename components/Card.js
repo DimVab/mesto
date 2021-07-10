@@ -1,14 +1,9 @@
-import { openPopup } from "../pages/index.js";
-
-// переменные, связанные с открытием попапа с картинкой
-const imagePopup = document.querySelector('.popup_type_open-image');
-const openedImage = imagePopup.querySelector('.popup__image');
-const caption = imagePopup.querySelector('.popup__caption');
+import PopupWithImage from './PopupWithImage.js';
 
 class Card {
-  constructor(data, cardSelector, handleCardClick) {
-    this._name = data.name;
-    this._src = data.link;
+  constructor(data, cardSelector, {handleCardClick}) {
+    this.name = data.name;
+    this.src = data.link;
     this._alt = data.alt;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
@@ -33,8 +28,8 @@ class Card {
 
     this._setEventListeners();
 
-    this._card.querySelector('.element__name').textContent = this._name;
-    this._cardImage.src = this._src;
+    this._card.querySelector('.element__name').textContent = this.name;
+    this._cardImage.src = this.src;
     this._cardImage.alt = this._alt;
   }
 
@@ -53,9 +48,7 @@ class Card {
       this._handleDeleteIcon();
     });
 
-    this._cardImage.addEventListener('click', () => {
-      this._handleImageClick();
-    });
+    this._handleCardClick();
   }
 
   _handleLikeIcon() {
@@ -64,12 +57,6 @@ class Card {
 
   _handleDeleteIcon() {
     this._deleteButton.closest('.element').remove();
-  }
-
-  _handleImageClick() {
-    openPopup(imagePopup);
-    openedImage.src = this._src;
-    caption.textContent = this._name;
   }
 }
 
