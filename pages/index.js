@@ -1,35 +1,28 @@
-import { initialCards, selectors } from '../utils/constants.js';
+import { initialCards, cardsContainer, selectors, profileFormElement, addingImageFormElement, addButton, editButton } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
-import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
-const popups = document.querySelectorAll('.popup');
 // переменные, связанные с редактированием профиля
-const editButton = document.querySelector('.profile__edit-button');
-const profilePopup = document.querySelector('.popup_type_edit-profile');
-const nameInput = profilePopup.querySelector('.form__input_type_name');
-const jobInput = profilePopup.querySelector('.form__input_type_job');
-const profileName = document.querySelector('.profile__name');
-const profileJob = document.querySelector('.profile__job');
-const profileFormElement = profilePopup.querySelector('.form');
+// const nameInput = profilePopup.querySelector('.form__input_type_name');
+// const jobInput = profilePopup.querySelector('.form__input_type_job');
 
 // переменные, связанные с добавлением карточек
-const cardsContainer = '.elements__list';
-const addButton = document.querySelector('.profile__add-button');
-const addingImagePopup = document.querySelector('.popup_type_add-image');
-const addingImageFormElement = addingImagePopup.querySelector('.form');
-const cardNameInput = addingImagePopup.querySelector('.form__input_type_name-of-card');
-const cardUrlInput = addingImagePopup.querySelector('.form__input_type_url');
+// const cardNameInput = addingImagePopup.querySelector('.form__input_type_name-of-card');
+// const cardUrlInput = addingImagePopup.querySelector('.form__input_type_url');
 
+//
 const cardsList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card (item, '.card-template', {handleCardClick: (item) => {
+    const card = new Card (item, '.card-template', {handleCardClick: () => {
 
       // слабая связь внутри слабой связи
       const popupWithImage = new PopupWithImage('.popup_type_open-image');
+      popupWithImage.setEventListeners();
       card._cardImage.addEventListener('click', () => {
         popupWithImage.open(card.src, card.name);
       });
@@ -39,7 +32,6 @@ const cardsList = new Section({
     cardsList.addItem(cardElement);
   }
 }, cardsContainer);
-// возможно, нужно вынести код renderer в одну ф-ю, тк она может переиспользоваться
 
 cardsList.renderItems();
 
@@ -49,95 +41,85 @@ profileFormValidator.enableValidation();
 const addingImageFormValidator = new FormValidator (selectors, addingImageFormElement);
 addingImageFormValidator.enableValidation();
 
-// открыть попап
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', handleExitUsingKey);
-}
+// добавление функциональности попапа, добавляющего картинки
+const addingImagePopup = new PopupWithForm('.popup_type_add-image', {
+  submitFormHandler: (data) => {
+    addingImagePopup._popup.querySelector('.form').addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const data = addingImagePopup._getInputValues(); /* всё работает, но так нельзя */
+    const card = new Card (data, '.card-template', {handleCardClick: () => {
 
-// открыть попап редактирования профиля
-function openProfilePopup() {
-  openPopup(profilePopup);
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
-  profileFormValidator.resetValidation();
-}
+      // слабая связь внутри слабой связи
+      const popupWithImage = new PopupWithImage('.popup_type_open-image');
+      popupWithImage.setEventListeners();
+      card._cardImage.addEventListener('click', () => {
+        popupWithImage.open(card.src, card.name);
+      });
+    }});
 
-// открыть попап добавления картинки
-function openAddingImagePopup() {
-  openPopup(addingImagePopup);
-  addingImageFormElement.reset();
-  addingImageFormValidator.resetValidation();
-}
-
-// закрыть любой попап
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleExitUsingKey);
-}
-
-// закрыть попап кнопкой
-function handleExitUsingKey(evt) {
-  if (evt.key === exitKey) {
-    const popup = document.querySelector('.popup_opened');
-    closePopup(popup);
+    const cardElement = card.getCard();
+    cardsList.prependItem(cardElement);
+    addingImagePopup.close();
+    });
   }
-}
+});
+addingImagePopup.setEventListeners();
 
-// сохранить изменения в редактировании профиля
-function saveProfileChanges (evt) {
-  evt.preventDefault();
+const profilePopup = new PopupWithForm('.popup_type_edit-profile', {
+  submitFormHandler: (data) => {
+    const userInfo = new UserInfo('.profile__name','.profile__job');
 
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-
-  closePopup(profilePopup);
-}
+    profilePopup._popup.querySelector('.form').addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      userInfo.setUserInfo(data);
+      profilePopup.close();
+    });
+  }
+});
+profilePopup.setEventListeners();
 
 // добавить карточку
-function addCard(evt) {
-  evt.preventDefault();
+// function addCard(evt) {
+//   evt.preventDefault();
 
-  const item = {};
+//   const item = {};
 
-  item.name = cardNameInput.value;
-  item.link = cardUrlInput.value;
+//   item.name = cardNameInput.value;
+//   item.link = cardUrlInput.value;
 
-  const newCard = createCard(item);
-  cardsList.prepend(newCard);
+//   const newCard = createCard(item);
+//   cardsList.prepend(newCard);
 
-  addingImageFormElement.reset();
+//   addingImageFormElement.reset();
 
-  closePopup(addingImagePopup);
-}
+//   closePopup(addingImagePopup);
+// }
 
-function createCard(item) {
-  const card = new Card (item, '.card-template');
-  return card.getCard();
-}
+// function createCard(item) {
+//   const card = new Card (item, '.card-template');
+//   return card.getCard();
 
 // слушатели событий:
 // для форм
-profileFormElement.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-});
-addingImageFormElement.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-});
+// profileFormElement.addEventListener('submit', (evt) => {
+//   evt.preventDefault();
+// });
+// addingImageFormElement.addEventListener('submit', (evt) => {
+//   evt.preventDefault();
+// });
 // для редактирования профиля
-editButton.addEventListener('click', openProfilePopup);
-profileFormElement.addEventListener('submit', saveProfileChanges);
-// для добавления карточки
-addButton.addEventListener('click', openAddingImagePopup);
-addingImageFormElement.addEventListener('submit', addCard);
-// закрыть любой попап
-popups.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup_opened')) {
-      closePopup(popup);
-    }
-    if (evt.target.classList.contains('popup__close-icon')) {
-      closePopup(popup);
-    }
-  });
+editButton.addEventListener('click', () => {
+  profilePopup.open();
+  const userInfo = new UserInfo('.profile__name', '.profile__job');
+  const userData = userInfo.getUserInfo();
+  profilePopup._popup.querySelector('.form__input_type_name').value = userData.userName;
+  profilePopup._popup.querySelector('.form__input_type_job').value = userData.userJob;
+  profileFormValidator.resetValidation();
 });
+// profileFormElement.addEventListener('submit', saveProfileChanges);
+// для добавления карточки
+addButton.addEventListener('click', () => {
+  addingImagePopup.open();
+  addingImageFormValidator.resetValidation();
+});
+// addingImageFormElement.addEventListener('submit', addCard);
