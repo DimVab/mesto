@@ -18,6 +18,7 @@ export default class PopupWithForm extends Popup {
     this._popup.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
+    // здесь будет submitForm(_getInputVslues)
   }
 
   close() {

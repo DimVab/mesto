@@ -15,20 +15,24 @@ const profileJob = document.querySelector('.profile__job');
 const profileFormElement = profilePopup.querySelector('.form');
 
 // переменные, связанные с добавлением карточек
-const cardsList = document.querySelector('.elements__list');
+const cardsContainer = '.elements__list';
 const addButton = document.querySelector('.profile__add-button');
 const addingImagePopup = document.querySelector('.popup_type_add-image');
 const addingImageFormElement = addingImagePopup.querySelector('.form');
 const cardNameInput = addingImagePopup.querySelector('.form__input_type_name-of-card');
 const cardUrlInput = addingImagePopup.querySelector('.form__input_type_url');
-// другие переменные
-const imagePopup = document.querySelector('.popup_type_open-image');
 
-// первоначальное добавление карточек
-initialCards.forEach((item) => {
-  const cardElement = createCard(item);
-  cardsList.append(cardElement);
-});
+const cardsList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card (item, '.card-template');
+    const cardElement = card.getCard();
+    cardsList.addItem(cardElement);
+  }
+}, cardsContainer);
+// возможно, нужно вынести код renderer в одну ф-ю, тк она может переиспользоваться
+
+cardsList.renderItems();
 
 // добавление валидации
 const profileFormValidator = new FormValidator (selectors, profileFormElement);
