@@ -12,17 +12,15 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 
+
+const popupWithImage = new PopupWithImage('.popup_type_open-image');
+popupWithImage.setEventListeners();
+
 const cardsList = new Section({
   items: initialCards,
   renderer: (item) => {
     const card = new Card (item, '.card-template', {handleCardClick: () => {
-
-      // слабая связь внутри слабой связи
-      const popupWithImage = new PopupWithImage('.popup_type_open-image');
-      popupWithImage.setEventListeners();
-      card._cardImage.addEventListener('click', () => {
         popupWithImage.open(card.src, card.name);
-      });
     }});
 
     const cardElement = card.getCard();
@@ -42,13 +40,7 @@ addingImageFormValidator.enableValidation();
 const addingImagePopup = new PopupWithForm('.popup_type_add-image', {
   submitFormHandler: (data) => {
     const card = new Card (data, '.card-template', {handleCardClick: () => {
-
-      // слабая связь внутри слабой связи
-      const popupWithImage = new PopupWithImage('.popup_type_open-image');
-      popupWithImage.setEventListeners();
-      card._cardImage.addEventListener('click', () => {
         popupWithImage.open(card.src, card.name);
-      });
     }});
 
     const cardElement = card.getCard();

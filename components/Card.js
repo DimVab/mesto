@@ -48,7 +48,9 @@ class Card {
       this._handleDeleteIcon();
     });
 
-    this._handleCardClick();
+    this._cardImage.addEventListener('click', () => {
+      this._handleCardClick();
+    });
   }
 
   _handleLikeIcon() {
