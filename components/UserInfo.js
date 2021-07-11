@@ -1,5 +1,5 @@
 export default class UserInfo {
-  constructor(name, job) {
+  constructor({name, job}) {
     this._name = name;
     this._job = job;
   }
@@ -14,12 +14,6 @@ export default class UserInfo {
   }
 
   setUserInfo(data) {
-    // const userData = [this._name, this._job];
-
-    // for (let info in data) {
-    //   console.log(info);
-    // }
-
     document.querySelector(this._name).textContent = data.name;
     document.querySelector(this._job).textContent = data.profession;
   }
