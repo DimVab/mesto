@@ -26,6 +26,7 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close();
-    this._popup.querySelector('form').reset();
-  }
+    this._popup.querySelector('.form').reset();
+    // по условию при закрытии форма должна сбрасываться. Данное действие подходит для попапа добавления картинки, но, когда закрывается попап редактирования профиля, метод .reset() на долю секунды сбрасывает значения полей до установленных в атрибуте value
+   }
 }
