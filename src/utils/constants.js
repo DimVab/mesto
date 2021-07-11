@@ -1,32 +1,39 @@
+const altayImage = new URL('../images/elements/Altai.jpg', import.meta.url);
+const kamchatkaBeachImage = new URL('../images/elements/Kamchatka-beach.jpg', import.meta.url);
+const monrepoImage = new URL('../images/elements/Monrepo.jpg', import.meta.url);
+const baykalImage = new URL('../images/elements/Baikal.jpg', import.meta.url);
+const krasnayaPolyanaImage = new URL('../images/elements/Krasnaya-polyana.jpg', import.meta.url);
+const kamchatkaVolcanoImage = new URL('../images/elements/Kamchatka-volkano.jpg', import.meta.url);
+
 const initialCards = [
   {
     name: 'Алтай',
-    link: './images/elements/Altai.jpg',
+    link: altayImage,
     alt: 'Горные луга Алтая'
   },
   {
     name: 'Побережье Камчатки',
-    link: './images/elements/Kamchatka-beach.jpg',
+    link: kamchatkaBeachImage,
     alt: 'Побережье Камчатки'
   },
   {
     name: 'Парк Монрепо',
-    link: './images/elements/Monrepo.jpg',
+    link: monrepoImage,
     alt: 'Парк Монрепо зимой'
   },
   {
     name: 'Байкал',
-    link: './images/elements/Baikal.jpg',
+    link: baykalImage,
     alt: 'Байкал зимой'
   },
   {
     name: 'Красная поляна',
-    link: './images/elements/Krasnaya-polyana.jpg',
+    link: krasnayaPolyanaImage,
     alt: 'Горы на Красной поляне'
   },
   {
     name: 'Вулкан Камчатки',
-    link: './images/elements/Kamchatka-volkano.jpg',
+    link: kamchatkaVolcanoImage,
     alt: 'Вулкан на Камчатке'
   }
 ];

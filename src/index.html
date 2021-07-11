@@ -7,20 +7,19 @@
   <meta name="description" content="Сайт с фотографиями мест России">
   <meta name="keywords" content="Россия, места, природа, фотографии">
   <meta name="author" content="Дмитрий Вабищевич">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Место</title>
 </head>
 
 <body class="root">
   <header class="header root__header">
-    <img src="./images/icons/mesto.svg" alt="Место. Россия" class="header__logo">
+    <img src="<%=require('./images/icons/mesto.svg')%>" alt="Место. Россия" class="header__logo">
   </header>
 
   <main class="main">
 
     <section class="profile main__profile">
       <div class="profile__container">
-        <img class="profile__avatar" src="./images/kusto.jpg" alt="Фотография Жака-Ива Кусто">
+        <img class="profile__avatar" src="<%=require('./images/kusto.jpg')%>" alt="Фотография Жака-Ива Кусто">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <p class="profile__job">Исследователь океана</p>
@@ -96,8 +95,6 @@
       <button class="element__delete" type="button" aria-label="Удалить элемент"></button>
     </li>
   </template>
-
-  <script type="module" src="./pages/index.js"></script>
 
 </body>
 </html>
