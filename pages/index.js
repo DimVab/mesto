@@ -16,18 +16,14 @@ import UserInfo from '../components/UserInfo.js';
 const popupWithImage = new PopupWithImage('.popup_type_open-image');
 popupWithImage.setEventListeners();
 
+// отрисовка массива карточек
 const cardsList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card (item, '.card-template', {handleCardClick: () => {
-        popupWithImage.open(card.src, card.name);
-    }});
-
-    const cardElement = card.getCard();
+    const cardElement = createCard(item);
     cardsList.addItem(cardElement);
   }
 }, cardsContainer);
-
 cardsList.renderItems();
 
 // добавление валидации
@@ -36,20 +32,17 @@ profileFormValidator.enableValidation();
 const addingImageFormValidator = new FormValidator (selectors, addingImageFormElement);
 addingImageFormValidator.enableValidation();
 
-// добавление функциональности попапа, добавляющего картинки
+// добавление экземпляра класса, добавляющего картинки
 const addingImagePopup = new PopupWithForm('.popup_type_add-image', {
   submitFormHandler: (data) => {
-    const card = new Card (data, '.card-template', {handleCardClick: () => {
-        popupWithImage.open(card.src, card.name);
-    }});
-
-    const cardElement = card.getCard();
+    const cardElement = createCard(data);
     cardsList.prependItem(cardElement);
     addingImagePopup.close();
   }
 });
 addingImagePopup.setEventListeners();
 
+// добавление экземпляра класса, редактирующего профиь
 const profilePopup = new PopupWithForm('.popup_type_edit-profile', {
   submitFormHandler: (data) => {
     const userInfo = new UserInfo({name: '.profile__name', job: '.profile__job'});
@@ -60,9 +53,14 @@ const profilePopup = new PopupWithForm('.popup_type_edit-profile', {
 });
 profilePopup.setEventListeners();
 
-// function createCard(item) {
-//   const card = new Card (item, '.card-template');
-//   return card.getCard();
+function createCard(data) {
+  const card = new Card (data, '.card-template', {handleCardClick: () => {
+    popupWithImage.open(card.src, card.name);
+}});
+
+  const cardElement = card.getCard();
+  return cardElement;
+}
 
 // слушатели:
 // открыть попап редактирования профиля
