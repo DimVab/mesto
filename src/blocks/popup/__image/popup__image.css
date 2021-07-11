@@ -2,6 +2,5 @@
  max-width: 75vw;
  max-height: 75vh;
  margin-bottom: 10px;
- -o-object-fit: cover;
  object-fit: cover;
 }

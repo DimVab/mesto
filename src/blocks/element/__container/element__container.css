@@ -1,12 +1,6 @@
 .element__container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   margin: 25px 20px 31px 21px;
 }
