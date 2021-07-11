@@ -42,11 +42,11 @@ const addingImagePopup = new PopupWithForm('.popup_type_add-image', {
 });
 addingImagePopup.setEventListeners();
 
-// добавление экземпляра класса, редактирующего профиь
+const userInfo = new UserInfo({name: '.profile__name', job: '.profile__job'});
+
+// добавление экземпляра класса, редактирующего профиль
 const profilePopup = new PopupWithForm('.popup_type_edit-profile', {
   submitFormHandler: (data) => {
-    const userInfo = new UserInfo({name: '.profile__name', job: '.profile__job'});
-
       userInfo.setUserInfo(data);
       profilePopup.close();
   }
@@ -66,7 +66,6 @@ function createCard(data) {
 // открыть попап редактирования профиля
 editButton.addEventListener('click', () => {
   profilePopup.open();
-  const userInfo = new UserInfo({name: '.profile__name', job: '.profile__job'});
   profilePopup._popup.querySelector('.form__input_type_name').value = userInfo.getUserInfo().userName;
   profilePopup._popup.querySelector('.form__input_type_job').value = userInfo.getUserInfo().userJob;
   profileFormValidator.resetValidation();
