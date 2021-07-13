@@ -44,7 +44,7 @@ const addingImagePopup = new PopupWithForm('.popup_type_add-image', {
 });
 addingImagePopup.setEventListeners();
 
-const userInfo = new UserInfo({name: '.profile__name', job: '.profile__job'});
+const userInfo = new UserInfo({nameSelector: '.profile__name', jobSelector: '.profile__job'});
 
 // добавление экземпляра класса, редактирующего профиль
 const profilePopup = new PopupWithForm('.popup_type_edit-profile', {
@@ -57,7 +57,7 @@ profilePopup.setEventListeners();
 
 function createCard(data) {
   const card = new Card (data, '.card-template', {handleCardClick: () => {
-    popupWithImage.open(card.src, card.name);
+    popupWithImage.open(card.src, card.alt, card.name);
 }});
 
   const cardElement = card.getCard();
@@ -68,8 +68,9 @@ function createCard(data) {
 // открыть попап редактирования профиля
 editButton.addEventListener('click', () => {
   profilePopup.open();
-  profilePopup._popup.querySelector('.form__input_type_name').value = userInfo.getUserInfo().userName;
-  profilePopup._popup.querySelector('.form__input_type_job').value = userInfo.getUserInfo().userJob;
+  const currentUserInfo = userInfo.getUserInfo();
+  profilePopup._popup.querySelector('.form__input_type_name').value = currentUserInfo.userName;
+  profilePopup._popup.querySelector('.form__input_type_job').value = currentUserInfo.userJob;
   profileFormValidator.resetValidation();
 });
 // открыть попап добавления карточки
