@@ -1,8 +1,8 @@
 class Card {
   constructor(data, cardSelector, {handleCardClick}) {
-    this.name = data.name;
-    this.src = data.link;
-    this.alt = data.alt;
+    this._name = data.name;
+    this._src = data.link;
+    this._alt = data.alt;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -26,9 +26,9 @@ class Card {
 
     this._setEventListeners();
 
-    this._card.querySelector('.element__name').textContent = this.name;
-    this._cardImage.src = this.src;
-    this._cardImage.alt = this.alt;
+    this._card.querySelector('.element__name').textContent = this._name;
+    this._cardImage.src = this._src;
+    this._cardImage.alt = this._alt;
   }
 
   getCard() {
@@ -47,7 +47,7 @@ class Card {
     });
 
     this._cardImage.addEventListener('click', () => {
-      this._handleCardClick();
+      this._handleCardClick(this._src, this._alt, this._name);
     });
   }
 

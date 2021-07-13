@@ -56,8 +56,8 @@ const profilePopup = new PopupWithForm('.popup_type_edit-profile', {
 profilePopup.setEventListeners();
 
 function createCard(data) {
-  const card = new Card (data, '.card-template', {handleCardClick: () => {
-    popupWithImage.open(card.src, card.alt, card.name);
+  const card = new Card (data, '.card-template', {handleCardClick: (src, alt, name) => {
+    popupWithImage.open(src, alt, name);
 }});
 
   const cardElement = card.getCard();
