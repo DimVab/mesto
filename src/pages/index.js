@@ -14,6 +14,8 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 
+const userInfo = new UserInfo({nameSelector: '.profile__name', jobSelector: '.profile__job'});
+
 const api = new Api ({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26/',
   headers: {
@@ -29,10 +31,14 @@ const api = new Api ({
       }
     }, cardsContainer);
     cardsList.renderItems();
+  },
+  renderUserInfo: (userData) => {
+    userInfo.setUserInfo(userData);
   }
 });
 
 api.getInitialCards();
+api.getUserInfo();
 
 
 const popupWithImage = new PopupWithImage('.popup_type_open-image');
@@ -53,8 +59,6 @@ const addingImagePopup = new PopupWithForm('.popup_type_add-image', {
   }
 });
 addingImagePopup.setEventListeners();
-
-const userInfo = new UserInfo({nameSelector: '.profile__name', jobSelector: '.profile__job'});
 
 // добавление экземпляра класса, редактирующего профиль
 const profilePopup = new PopupWithForm('.popup_type_edit-profile', {
