@@ -31,6 +31,20 @@ class Api {
         this._renderUserInfo(userInfo);
       });
   }
+
+  editUserInfo(data) {
+    fetch(`${this._baseUrl}users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify(data)
+      })
+      .then((res) => {
+        return res.json();
+      })
+      .then((userInfo) => {
+        this._renderUserInfo(userInfo);
+      });
+  }
 }
 
 export default Api;

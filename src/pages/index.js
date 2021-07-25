@@ -63,7 +63,7 @@ addingImagePopup.setEventListeners();
 // добавление экземпляра класса, редактирующего профиль
 const profilePopup = new PopupWithForm('.popup_type_edit-profile', {
   submitFormHandler: (data) => {
-      userInfo.setUserInfo(data);
+      api.editUserInfo(data);
       profilePopup.close();
   }
 });
