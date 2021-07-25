@@ -1,12 +1,12 @@
 import './index.css';
 
-import {initialCards,
-        cardsContainer,
+import {cardsContainer,
         selectors,
         profileFormElement,
         addingImageFormElement,
         addButton,
         editButton } from '../utils/constants.js';
+import Api from '../components/Api.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
@@ -14,19 +14,29 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 
+const api = new Api ({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-26/',
+  headers: {
+    authorization: '1e46d460-5fe9-4d55-8f96-bc20172f2d2e',
+    'Content-Type': 'application/json'
+  },
+  renderInitialCards: (elements) => {
+    const cardsList = new Section({
+      items: elements,
+      renderer: (item) => {
+        const cardElement = createCard(item);
+        cardsList.addItem(cardElement);
+      }
+    }, cardsContainer);
+    cardsList.renderItems();
+  }
+});
+
+api.getInitialCards();
+
 
 const popupWithImage = new PopupWithImage('.popup_type_open-image');
 popupWithImage.setEventListeners();
-
-// отрисовка массива карточек
-const cardsList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const cardElement = createCard(item);
-    cardsList.addItem(cardElement);
-  }
-}, cardsContainer);
-cardsList.renderItems();
 
 // добавление валидации
 const profileFormValidator = new FormValidator (selectors, profileFormElement);
