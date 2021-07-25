@@ -28,7 +28,6 @@ class Api {
         return res.json();
       })
       .then((userInfo) => {
-        console.log(userInfo);
         this._renderUserInfo(userInfo);
       });
   }
