@@ -34,6 +34,11 @@ const api = new Api ({
   },
   renderUserInfo: (userData) => {
     userInfo.setUserInfo(userData);
+  },
+  prependCard: (cardInfo) => {
+    const cardsList = new Section({}, cardsContainer);
+    const cardElement = createCard(cardInfo);
+    cardsList.prependItem(cardElement);
   }
 });
 
@@ -53,8 +58,7 @@ addingImageFormValidator.enableValidation();
 // добавление экземпляра класса, добавляющего картинки
 const addingImagePopup = new PopupWithForm('.popup_type_add-image', {
   submitFormHandler: (data) => {
-    const cardElement = createCard(data);
-    cardsList.prependItem(cardElement);
+    api.addCard(data);
     addingImagePopup.close();
   }
 });
