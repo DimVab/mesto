@@ -104,17 +104,14 @@ function createCard(data) {
         card.likeButton.classList.add('element__like_active');
       });
     }
+   },
+   handleDeleteIconClick: (id) => {
+    api.deleteCard(id).then(() => {
+      card._deleteButton.closest('.element').remove();
+    });
    }
   });
-
   const cardElement = card.getCard();
-
-  // setInterval(() => {
-  //   api.getCardLikesData(data._id).then((res) => {
-  //     // console.log(res);
-  //     cardElement.counter.textContent = res.likes.length;
-  //   });
-  // }, 1000000);
 
   return cardElement;
 }

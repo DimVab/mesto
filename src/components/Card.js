@@ -6,10 +6,10 @@ class Card {
     this._cardSelector = cardSelector;
     this._handleCardClick = functions.handleCardClick;
     this._handleLikeIcon = functions.handleLikeIcon;
+    this._handleDeleteIconClick = functions.handleDeleteIconClick;
     this._likes = data.likes;
-    // this._likeCard = functions.likeCard;
-    // this._removeLikeCard = functions.removeLikeCard;
     this._id = data._id;
+    this._userId = data.owner._id;
   }
 
   _getTemplate() {
@@ -32,6 +32,7 @@ class Card {
 
     this._setEventListeners();
     this._findUserLike();
+    this._changeNotMyCard();
 
     this._card.querySelector('.element__name').textContent = this._name;
     this._cardImage.src = this._src;
@@ -51,7 +52,7 @@ class Card {
     });
 
     this._deleteButton.addEventListener('click', () => {
-      this._handleDeleteIcon();
+      this._handleDeleteIconClick(this._id);
     });
 
     this._cardImage.addEventListener('click', () => {
@@ -59,15 +60,17 @@ class Card {
     });
   }
 
-  _handleDeleteIcon() {
-    this._deleteButton.closest('.element').remove();
-  }
-
   _findUserLike() {
     if (this._likes.some((user) => {
       return user._id === '9e2f6b5f7b1c9513313c4f7c';
     })) {
       this.likeButton.classList.add('element__like_active');
+    }
+  }
+
+  _changeNotMyCard() {
+    if (this._userId !== '9e2f6b5f7b1c9513313c4f7c') {
+      this._deleteButton.remove();
     }
   }
 }

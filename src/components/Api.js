@@ -70,14 +70,12 @@ class Api {
       });
   }
 
-  getCardLikesData(cardID) {
-    // эта ф-я будет с интервалом запрашивать кол-во лайков и обновлять их в then в index.js
-    return fetch(`${this._baseUrl}cards/likes/${cardID}`, {
-      method: 'GET',
+  deleteCard(cardID) {
+    return fetch(`${this._baseUrl}cards/${cardID}`, {
+      method: 'DELETE',
       headers: this._headers
       })
       .then((res) => {
-        console.log(res);
         return res.json();
       });
   }
