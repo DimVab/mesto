@@ -9,57 +9,48 @@ class Api {
   }
 
   getInitialCards() {
-    fetch(`${this._baseUrl}cards`, {
+    return fetch(`${this._baseUrl}cards`, {
     method: 'GET',
     headers: this._headers
     })
     .then((res) => {
       return res.json();
-    })
-    .then((items) => {
-      console.log(items);
-      this._renderInitialCards(items);
     });
   }
 
   getUserInfo() {
-    fetch(`${this._baseUrl}users/me`, {
+    return fetch(`${this._baseUrl}users/me`, {
       method: 'GET',
       headers: this._headers
       })
       .then((res) => {
         return res.json();
-      })
-      .then((userInfo) => {
-        this._renderUserInfo(userInfo);
       });
   }
 
+  getInitialData() {
+    return Promise.all([this.getInitialCards(), this.getUserInfo()]);
+  }
+
   editUserInfo(data) {
-    fetch(`${this._baseUrl}users/me`, {
+    return fetch(`${this._baseUrl}users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify(data)
       })
       .then((res) => {
         return res.json();
-      })
-      .then((userInfo) => {
-        this._renderUserInfo(userInfo);
       });
   }
 
   addCard(data) {
-    fetch(`${this._baseUrl}cards`, {
+    return fetch(`${this._baseUrl}cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify(data)
       })
       .then((res) => {
         return res.json();
-      })
-      .then((cardInfo) => {
-        this._prependCard(cardInfo);
       });
   }
 
