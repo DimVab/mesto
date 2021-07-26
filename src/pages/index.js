@@ -12,6 +12,7 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithSubmit from '../components/PopupWithSubmit.js';
 import UserInfo from '../components/UserInfo.js';
 
 const userInfo = new UserInfo({nameSelector: '.profile__name', jobSelector: '.profile__job'});
@@ -26,6 +27,16 @@ const api = new Api ({
 
 const popupWithImage = new PopupWithImage('.popup_type_open-image');
 popupWithImage.setEventListeners();
+
+const submitPopup = new PopupWithSubmit('.popup_type_submit', {
+  submitFormHandler: ((cardId, card) => {
+    api.deleteCard(cardId).then(() => {
+      card._card.remove();
+      submitPopup.close();
+    });
+  })
+});
+submitPopup.setEventListeners();
 
 // добавление экземпляра класса, добавляющего картинки
 const addingImagePopup = new PopupWithForm('.popup_type_add-image', {
@@ -105,11 +116,10 @@ function createCard(data) {
       });
     }
    },
-   handleDeleteIconClick: (id) => {
-    api.deleteCard(id).then(() => {
-      card._deleteButton.closest('.element').remove();
-    });
-   }
+       handleDeleteIconClick: () => {
+        submitPopup.setCardInfo(data._id, card);
+        submitPopup.open();
+      }
   });
   const cardElement = card.getCard();
 

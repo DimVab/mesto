@@ -52,7 +52,7 @@ class Card {
     });
 
     this._deleteButton.addEventListener('click', () => {
-      this._handleDeleteIconClick(this._id);
+      this._handleDeleteIconClick();
     });
 
     this._cardImage.addEventListener('click', () => {
