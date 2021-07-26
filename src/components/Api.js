@@ -5,6 +5,7 @@ class Api {
     this._renderInitialCards = options.renderInitialCards;
     this._renderUserInfo = options.renderUserInfo;
     this._prependCard = options.prependCard;
+    this._countLikes = options.countLikes;
   }
 
   getInitialCards() {
@@ -16,6 +17,7 @@ class Api {
       return res.json();
     })
     .then((items) => {
+      console.log(items);
       this._renderInitialCards(items);
     });
   }
@@ -58,6 +60,34 @@ class Api {
       })
       .then((cardInfo) => {
         this._prependCard(cardInfo);
+      });
+  }
+
+  likeCard(cardID) {
+    fetch(`${this._baseUrl}cards/likes/${cardID}`, {
+      method: 'PUT',
+      headers: this._headers
+      })
+      .then((res) => {
+        return res.json();
+      })
+      .then((cardInfo) => {
+        console.log(cardInfo.likes);
+        this._countLikes();
+      });
+  }
+
+  removeLikeCard(cardID) {
+    fetch(`${this._baseUrl}cards/likes/${cardID}`, {
+      method: 'DELETE',
+      headers: this._headers
+      })
+      .then((res) => {
+        return res.json();
+      })
+      .then((cardInfo) => {
+        console.log(cardInfo.likes);
+        this._countLikes();
       });
   }
 }

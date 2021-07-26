@@ -74,9 +74,17 @@ const profilePopup = new PopupWithForm('.popup_type_edit-profile', {
 profilePopup.setEventListeners();
 
 function createCard(data) {
-  const card = new Card (data, '.card-template', {handleCardClick: (src, alt, name) => {
+  const card = new Card (data, '.card-template',
+   {handleCardClick: (src, alt, name) => {
     popupWithImage.open(src, alt, name);
-}});
+   },
+    likeCard: (id) => {
+    api.likeCard(id);
+   },
+    removeLikeCard: (id) => {
+    api.removeLikeCard(id);
+   }}
+);
 
   const cardElement = card.getCard();
   return cardElement;
