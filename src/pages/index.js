@@ -92,14 +92,29 @@ function createCard(data) {
    {handleCardClick: (src, alt, name) => {
     popupWithImage.open(src, alt, name);
    },
-    likeCard: (id) => {
-    api.likeCard(id);
-   },
-    removeLikeCard: (id) => {
-    api.removeLikeCard(id);
-   }}
-);
+   handleLikeIcon: (id) => {
+      if (card.likeButton.classList.contains('element__like_active')) {
+        api.removeLikeCard(id).then((res) => {
+        card.counter.textContent = res.likes.length;
+        card.likeButton.classList.remove('element__like_active');
+        });
+    } else {
+      api.likeCard(id).then((res) => {
+        card.counter.textContent = res.likes.length;
+        card.likeButton.classList.add('element__like_active');
+      });
+    }
+   }
+  });
 
   const cardElement = card.getCard();
+
+  // setInterval(() => {
+  //   api.getCardLikesData(data._id).then((res) => {
+  //     // console.log(res);
+  //     cardElement.counter.textContent = res.likes.length;
+  //   });
+  // }, 1000000);
+
   return cardElement;
 }

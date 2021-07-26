@@ -2,10 +2,6 @@ class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
-    this._renderInitialCards = options.renderInitialCards;
-    this._renderUserInfo = options.renderUserInfo;
-    this._prependCard = options.prependCard;
-    this._countLikes = options.countLikes;
   }
 
   getInitialCards() {
@@ -55,30 +51,34 @@ class Api {
   }
 
   likeCard(cardID) {
-    fetch(`${this._baseUrl}cards/likes/${cardID}`, {
+    return fetch(`${this._baseUrl}cards/likes/${cardID}`, {
       method: 'PUT',
       headers: this._headers
       })
       .then((res) => {
         return res.json();
-      })
-      .then((cardInfo) => {
-        console.log(cardInfo.likes);
-        this._countLikes();
       });
   }
 
   removeLikeCard(cardID) {
-    fetch(`${this._baseUrl}cards/likes/${cardID}`, {
+    return fetch(`${this._baseUrl}cards/likes/${cardID}`, {
       method: 'DELETE',
       headers: this._headers
       })
       .then((res) => {
         return res.json();
+      });
+  }
+
+  getCardLikesData(cardID) {
+    // эта ф-я будет с интервалом запрашивать кол-во лайков и обновлять их в then в index.js
+    return fetch(`${this._baseUrl}cards/likes/${cardID}`, {
+      method: 'GET',
+      headers: this._headers
       })
-      .then((cardInfo) => {
-        console.log(cardInfo.likes);
-        this._countLikes();
+      .then((res) => {
+        console.log(res);
+        return res.json();
       });
   }
 }

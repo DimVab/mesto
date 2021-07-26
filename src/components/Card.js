@@ -5,9 +5,10 @@ class Card {
     this._alt = data.alt;
     this._cardSelector = cardSelector;
     this._handleCardClick = functions.handleCardClick;
+    this._handleLikeIcon = functions.handleLikeIcon;
     this._likes = data.likes;
-    this._likeCard = functions.likeCard;
-    this._removeLikeCard = functions.removeLikeCard;
+    // this._likeCard = functions.likeCard;
+    // this._removeLikeCard = functions.removeLikeCard;
     this._id = data._id;
   }
 
@@ -25,16 +26,17 @@ class Card {
     this._card = this._getTemplate();
     // классовые переменные
     this._cardImage = this._card.querySelector('.element__image');
-    this._likeButton = this._card.querySelector('.element__like');
+    this.likeButton = this._card.querySelector('.element__like');
     this._deleteButton = this._card.querySelector('.element__delete');
-    this._counter = this._card.querySelector('.element__like-counter');
+    this.counter = this._card.querySelector('.element__like-counter');
 
     this._setEventListeners();
+    this._findUserLike();
 
     this._card.querySelector('.element__name').textContent = this._name;
     this._cardImage.src = this._src;
     this._cardImage.alt = this._alt;
-    this._counter.textContent = this._likes.length;
+    this.counter.textContent = this._likes.length;
   }
 
   getCard() {
@@ -44,8 +46,8 @@ class Card {
   }
 
   _setEventListeners() {
-    this._likeButton.addEventListener('click', () => {
-      this._handleLikeIcon();
+    this.likeButton.addEventListener('click', () => {
+      this._handleLikeIcon(this._id);
     });
 
     this._deleteButton.addEventListener('click', () => {
@@ -57,18 +59,16 @@ class Card {
     });
   }
 
-  _handleLikeIcon() {
-    if (this._likeButton.classList.contains('element__like_active')) {
-      this._removeLikeCard(this._id);
-      this._likeButton.classList.remove('element__like_active');
-    } else {
-      this._likeCard(this._id);
-      this._likeButton.classList.add('element__like_active');
-    }
-  }
-
   _handleDeleteIcon() {
     this._deleteButton.closest('.element').remove();
+  }
+
+  _findUserLike() {
+    if (this._likes.some((user) => {
+      return user._id === '9e2f6b5f7b1c9513313c4f7c';
+    })) {
+      this.likeButton.classList.add('element__like_active');
+    }
   }
 }
 
