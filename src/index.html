@@ -20,7 +20,7 @@
     <section class="profile main__profile">
       <div class="profile__container">
         <div class="profile__avatar-container">
-          <img class="profile__avatar" src="" alt="Текущий аватар">
+          <img class="profile__avatar" src="#" alt="Текущий аватар">
           <button class="profile__avatar-edit-icon" type="button" aria-label="Изменить аватар"></button>
         </div>
         <div class="profile__info">
@@ -68,8 +68,8 @@
       <button class="popup__close-icon" type="button" aria-label="Закрыть"></button>
       <form class="form" name="avatar" novalidate>
         <div class="form__input-container">
-          <input type="url" class="form__input form__input_type_url" id="url-input" placeholder="Ссылка на картинку" name="avatar" required>
-          <span class="form__input-error url-input-error"></span>
+          <input type="url" class="form__input form__input_type_url" id="image-url-input" placeholder="Ссылка на картинку" name="avatar" required>
+          <span class="form__input-error image-url-input-error"></span>
         </div>
         <input type="submit" class="form__submit-button" value="Сохранить">
       </form>
@@ -86,8 +86,8 @@
           <span class="form__input-error name-of-card-input-error"></span>
         </div>
         <div class="form__input-container">
-          <input type="url" class="form__input form__input_type_url" id="url-input" placeholder="Ссылка на картинку" name="link" required>
-          <span class="form__input-error url-input-error"></span>
+          <input type="url" class="form__input form__input_type_url" id="avatar-url-input" placeholder="Ссылка на картинку" name="link" required>
+          <span class="form__input-error avatar-url-input-error"></span>
         </div>
         <input type="submit" class="form__submit-button" value="Создать">
       </form>
