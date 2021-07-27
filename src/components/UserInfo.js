@@ -1,7 +1,8 @@
 export default class UserInfo {
-  constructor({nameSelector, jobSelector}) {
+  constructor({nameSelector, jobSelector, avatarSelector}) {
     this._name = document.querySelector(nameSelector);
     this._job = document.querySelector(jobSelector);
+    this._avatar = document.querySelector(avatarSelector);
   }
 
   getUserInfo() {
@@ -11,6 +12,12 @@ export default class UserInfo {
     };
 
     return userInfo;
+  }
+
+  setInitialUserInfo(data) {
+    // чтобы при открытии сайта загружалась в том числе информация об актуальном аватаре
+    this.setUserInfo(data);
+    this._avatar.src = data.avatar;
   }
 
   setUserInfo(data) {
