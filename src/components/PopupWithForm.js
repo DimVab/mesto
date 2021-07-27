@@ -35,5 +35,6 @@ export default class PopupWithForm extends Popup {
     } else {
       this._popup.querySelector('.form__submit-button').value = initialValue;
     }
+    // у меня даже при загрузке в 1-2 сек текст кнопки не меняется, хотя, если проверить через console.log, то изменения происходят
   }
 }
