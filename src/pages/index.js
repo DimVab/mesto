@@ -4,8 +4,11 @@ import {cardsContainer,
         selectors,
         profileFormElement,
         addingImageFormElement,
+        avatarFormElement,
         addButton,
-        editButton } from '../utils/constants.js';
+        editButton,
+        profileAvatar,
+        avatarEditButton } from '../utils/constants.js';
 import Api from '../components/Api.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -38,6 +41,16 @@ const submitPopup = new PopupWithSubmit('.popup_type_submit', {
 });
 submitPopup.setEventListeners();
 
+const editAvatarPopup = new PopupWithForm('.popup_type_edit-avatar', {
+  submitFormHandler: ((avatarUrl) => {
+    api.editAvatar(avatarUrl).then((res) => {
+      profileAvatar.src = res.avatar;
+      editAvatarPopup.close();
+    });
+  })
+});
+editAvatarPopup.setEventListeners();
+
 // добавление экземпляра класса, добавляющего картинки
 const addingImagePopup = new PopupWithForm('.popup_type_add-image', {
   submitFormHandler: (data) => {
@@ -65,6 +78,7 @@ profilePopup.setEventListeners();
 api.getInitialData().then((data) => {
   const [initialCardsData, userInfoData] = data;
   userInfo.setUserInfo(userInfoData);
+  profileAvatar.src = userInfoData.avatar;
 
   const cardsList = new Section({
     items: initialCardsData,
@@ -90,6 +104,9 @@ api.getInitialData().then((data) => {
       profileFormValidator.resetValidation();
     });
 
+    avatarEditButton.addEventListener('click', () => {
+      editAvatarPopup.open();
+    });
   });
 
 // добавление валидации
@@ -97,6 +114,9 @@ const profileFormValidator = new FormValidator (selectors, profileFormElement);
 profileFormValidator.enableValidation();
 const addingImageFormValidator = new FormValidator (selectors, addingImageFormElement);
 addingImageFormValidator.enableValidation();
+const avatarFormValidator = new FormValidator (selectors, avatarFormElement);
+avatarFormValidator.enableValidation();
+
 
 function createCard(data) {
   const card = new Card (data, '.card-template',
@@ -125,3 +145,18 @@ function createCard(data) {
 
   return cardElement;
 }
+
+function mouseoverAvatar () {
+  // иначе я не понимаю, как сделать так, чтобы один элемент становился прозрачнее, а другой поверх него наоборот проявлялся
+  avatarEditButton.classList.add('profile__avatar-edit-icon_hovered');
+  profileAvatar.classList.add('profile__avatar_hovered');
+}
+
+function mouseoutAvatar () {
+  avatarEditButton.classList.remove('profile__avatar-edit-icon_hovered');
+  profileAvatar.classList.remove('profile__avatar_hovered');
+}
+
+profileAvatar.addEventListener('mouseover', mouseoverAvatar);
+avatarEditButton.addEventListener('mouseout', mouseoutAvatar);
+

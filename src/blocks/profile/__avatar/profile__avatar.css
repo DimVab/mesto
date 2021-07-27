@@ -5,6 +5,11 @@
   object-fit: cover;
   object-position: center;
   margin-right: 30px;
+  transition: .5s;
+}
+
+.profile__avatar:hover {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1024px) {
