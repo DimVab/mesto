@@ -32,7 +32,7 @@ class Card {
 
     this._setEventListeners();
     this._findUserLike();
-    this._changeNotMyCard();
+    this._deleteTrashIcon();
 
     this._card.querySelector('.element__name').textContent = this._name;
     this._cardImage.src = this._src;
@@ -68,7 +68,7 @@ class Card {
     }
   }
 
-  _changeNotMyCard() {
+  _deleteTrashIcon() {
     if (this._userId !== '9e2f6b5f7b1c9513313c4f7c') {
       this._deleteButton.remove();
     }

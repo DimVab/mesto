@@ -10,7 +10,10 @@ class Api {
     headers: this._headers
     })
     .then((res) => {
-      return res.json();
+      if(res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
     });
   }
 
@@ -20,7 +23,10 @@ class Api {
       headers: this._headers
       })
       .then((res) => {
-        return res.json();
+        if(res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
       });
   }
 
@@ -35,7 +41,10 @@ class Api {
       body: JSON.stringify(data)
       })
       .then((res) => {
-        return res.json();
+        if(res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
       });
   }
 
@@ -46,7 +55,10 @@ class Api {
       body: JSON.stringify(data)
       })
       .then((res) => {
-        return res.json();
+        if(res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
       });
   }
 
@@ -56,7 +68,10 @@ class Api {
       headers: this._headers
       })
       .then((res) => {
-        return res.json();
+        if(res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
       });
   }
 
@@ -66,7 +81,10 @@ class Api {
       headers: this._headers
       })
       .then((res) => {
-        return res.json();
+        if(res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
       });
   }
 
@@ -76,7 +94,10 @@ class Api {
       headers: this._headers
       })
       .then((res) => {
-        return res.json();
+        if(res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
       });
   }
 
@@ -87,7 +108,10 @@ class Api {
       body: JSON.stringify(avatarUrl)
       })
       .then((res) => {
-        return res.json();
+        if(res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
       });
   }
 }
