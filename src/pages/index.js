@@ -28,6 +28,13 @@ const api = new Api ({
   }
 });
 
+const cardsList = new Section({
+  renderer: (item) => {
+    const cardElement = createCard(item);
+    cardsList.addItem(cardElement);
+  }
+}, cardsContainer);
+
 const userInfo = new UserInfo({nameSelector: '.profile__name', jobSelector: '.profile__job', avatarSelector: '.profile__avatar'});
 // классы валидации:
 const profileFormValidator = new FormValidator (selectors, profileFormElement);
@@ -38,7 +45,7 @@ const popupWithImage = new PopupWithImage('.popup_type_open-image');
 const submitPopup = new PopupWithSubmit('.popup_type_submit', {
   submitFormHandler: ((cardId, card) => {
     api.deleteCard(cardId).then(() => {
-      card._card.remove();
+      card.cardElement.remove();
       submitPopup.close();
     })
     .catch((err) => {
@@ -51,15 +58,16 @@ const addingImagePopup = new PopupWithForm('.popup_type_add-image', {
   submitFormHandler: (data) => {
     addingImagePopup.renderSaving(true);
     api.addCard(data).then((cardData) => {
-      const cardsList = new Section({}, cardsContainer);
       const cardElement = createCard(cardData);
       cardsList.prependItem(cardElement);
     })
     .catch((err) => {
       console.log(err);
     })
-    .finally(addingImagePopup.renderSaving(false, 'Создать'));
-    addingImagePopup.close();
+    .finally(() => {
+      addingImagePopup.renderSaving(false, 'Создать');
+      addingImagePopup.close();
+    });
   }
 });
 
@@ -68,12 +76,14 @@ const editAvatarPopup = new PopupWithForm('.popup_type_edit-avatar', {
     editAvatarPopup.renderSaving(true);
     api.editAvatar(avatarUrl).then((res) => {
       profileAvatar.src = res.avatar;
-      editAvatarPopup.close();
     })
     .catch((err) => {
       console.log(err);
     })
-    .finally(editAvatarPopup.renderSaving(false, 'Сохранить'));
+    .finally(() => {
+      editAvatarPopup.renderSaving(false, 'Сохранить');
+      editAvatarPopup.close();
+    });
   })
 });
 
@@ -86,8 +96,10 @@ const profilePopup = new PopupWithForm('.popup_type_edit-profile', {
       .catch((err) => {
         console.log(err);
       })
-      .finally(profilePopup.renderSaving(false, 'Сохранить'));
-      profilePopup.close();
+      .finally(() => {
+        profilePopup.renderSaving(false, 'Сохранить');
+        profilePopup.close();
+      });
   }
 });
 
@@ -96,15 +108,7 @@ api.getInitialData()
   .then((data) => {
     const [initialCardsData, userInfoData] = data;
     userInfo.setInitialUserInfo(userInfoData);
-
-    const cardsList = new Section({
-      items: initialCardsData,
-      renderer: (item) => {
-        const cardElement = createCard(item);
-        cardsList.addItem(cardElement);
-      }
-    }, cardsContainer);
-    cardsList.renderItems();
+    cardsList.renderItems(initialCardsData);
   })
   .then(() => {
     // навешивание слушателей:

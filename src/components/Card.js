@@ -23,18 +23,18 @@ class Card {
   }
 
   _generateCard() {
-    this._card = this._getTemplate();
+    this.cardElement = this._getTemplate();
     // классовые переменные
-    this._cardImage = this._card.querySelector('.element__image');
-    this.likeButton = this._card.querySelector('.element__like');
-    this._deleteButton = this._card.querySelector('.element__delete');
-    this.counter = this._card.querySelector('.element__like-counter');
+    this._cardImage = this.cardElement.querySelector('.element__image');
+    this.likeButton = this.cardElement.querySelector('.element__like');
+    this._deleteButton = this.cardElement.querySelector('.element__delete');
+    this.counter = this.cardElement.querySelector('.element__like-counter');
 
     this._setEventListeners();
     this._findUserLike();
     this._deleteTrashIcon();
 
-    this._card.querySelector('.element__name').textContent = this._name;
+    this.cardElement.querySelector('.element__name').textContent = this._name;
     this._cardImage.src = this._src;
     this._cardImage.alt = this._alt;
     this.counter.textContent = this._likes.length;
@@ -43,7 +43,7 @@ class Card {
   getCard() {
     this._generateCard();
 
-    return this._card;
+    return this.cardElement;
   }
 
   _setEventListeners() {
